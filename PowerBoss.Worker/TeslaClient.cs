@@ -1,5 +1,8 @@
 ﻿using System.Net.Http.Headers;
 using System.Text.Json;
+using Ardalis.GuardClauses;
+using Microsoft.Extensions.Options;
+using PowerBoss.Domain.Configuration;
 using PowerBoss.Domain.Models.Responses;
 using PowerBoss.Domain.Models.Vehicle;
 
@@ -9,14 +12,18 @@ public class TeslaClient
 {
     private readonly HttpClient _client;
 
-    public TeslaClient(IHttpClientFactory factory)
+    public TeslaClient(IOptions<TeslaOptions> options, IHttpClientFactory factory)
     {
+        Guard.Against.NullOrWhiteSpace(options.Value.Endpoint);
+        Guard.Against.NullOrWhiteSpace(options.Value.AccessToken);
+        Guard.Against.NullOrWhiteSpace(options.Value.RefreshToken);
+        
         _client = factory.CreateClient(GetType().Name);
-        _client.BaseAddress = new Uri("https://owner-api.teslamotors.com/api/1/");
+        _client.BaseAddress = new Uri(options.Value.Endpoint);
         _client.DefaultRequestHeaders.Authorization
             = new AuthenticationHeaderValue(
                 "Bearer",
-                "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im5ZdVZJWTJTN3gxVHRYM01KMC1QMDJad3pXQSJ9.eyJpc3MiOiJodHRwczovL2F1dGgudGVzbGEuY29tL29hdXRoMi92MyIsImF1ZCI6WyJodHRwczovL293bmVyLWFwaS50ZXNsYW1vdG9ycy5jb20vIiwiaHR0cHM6Ly9hdXRoLnRlc2xhLmNvbS9vYXV0aDIvdjMvdXNlcmluZm8iXSwiYXpwIjoib3duZXJhcGkiLCJzdWIiOiJhYzQ1OTcxMC02ZThjLTRiYWEtOWFkMC0zZmIyODg2MDg3MTgiLCJzY3AiOlsib3BlbmlkIiwiZW1haWwiLCJvZmZsaW5lX2FjY2VzcyJdLCJhbXIiOlsicHdkIiwibWZhIiwib3RwIl0sImV4cCI6MTY3NzQzNzgxNSwiaWF0IjoxNjc3NDA5MDE1LCJhdXRoX3RpbWUiOjE2Nzc0MDkwMTR9.PdlrC79Dl3xQ9MIgDXshH4vDPIOCr0VTI6OUSXnoe7bG35PZuquWxxW7ivmPgKhCXIX6xcgR9NNKNm6225KrdgcT_TFEjD9TeUcW5vB6feL5OIMqGWQLA_UEhkwVFpvpX7K-UeMisFLVkaO0-BTD8vBz2m70Gw6LF1UlygHb1zRmourneUUtDYBLkAAMLEGXRff9T8f93VV0YRC-3jrru5120SLjWkxe92wgcCZ3H6wqR6beD3pJP7UlaqFBw-_Tn9r72Lm4FI0dH06jODTrxDq30OUXPKufxKCun3dDa-ZhTB9HSf3zJqKXIUxXxgahyDI6OMv0E1660evJdfqrjw"
+                options.Value.AccessToken
             );
     }
 

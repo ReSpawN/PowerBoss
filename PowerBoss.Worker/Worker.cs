@@ -19,10 +19,10 @@ public class Worker : BackgroundService
 
         foreach (VehicleSynopsis vehicle in vehicles)
         {
-            // VehicleChargeState? chargeState = await _client.GetVehicleChargingState(vehicle, stoppingToken);
+            VehicleChargeState? chargeState = await _client.GetVehicleChargingState(vehicle, stoppingToken);
             // VehicleDriveState? driveState = await _client.GetVehicleDriveState(vehicle, stoppingToken);
             // VehicleGuiSettings? guiSettings = await _client.GetVehicleGuiSettings(vehicle, stoppingToken);
-            VehicleState? vehicelState = await _client.GetVehicleState(vehicle, stoppingToken);
+            // VehicleState? vehicleState = await _client.GetVehicleState(vehicle, stoppingToken);
         }
 
         while (!stoppingToken.IsCancellationRequested)

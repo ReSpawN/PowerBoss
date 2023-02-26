@@ -1,12 +1,18 @@
+using PowerBoss.Domain.Configuration;
 using PowerBoss.Worker;
 
 IHost host = Host.CreateDefaultBuilder(args)
-    .ConfigureServices(services =>
+    .ConfigureServices((context, services) =>
     {
         services.AddHostedService<Worker>();
         services.AddHttpClient();
 
         services.AddSingleton<TeslaClient>();
+
+        services.AddOptions<TeslaOptions>()
+            .Bind(context.Configuration.GetRequiredSection(TeslaOptions.Section))
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
     })
     .Build();
 

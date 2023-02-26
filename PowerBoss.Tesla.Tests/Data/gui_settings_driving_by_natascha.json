@@ -1,10 +1,10 @@
 ﻿{
-  "gui_24_hour_time": true,
-  "gui_charge_rate_units": "kW",
-  "gui_distance_units": "km/hr",
-  "gui_range_display": "Rated",
-  "gui_temperature_units": "C",
-  "gui_tirepressure_units": "Bar",
-  "show_range_units": false,
-  "timestamp": 1677426161251
+	"gui_24_hour_time": true,
+	"gui_charge_rate_units": "kW",
+	"gui_distance_units": "km/hr",
+	"gui_range_display": "Rated",
+	"gui_temperature_units": "C",
+	"gui_tirepressure_units": "Bar",
+	"show_range_units": false,
+	"timestamp": 1677426161251
 }

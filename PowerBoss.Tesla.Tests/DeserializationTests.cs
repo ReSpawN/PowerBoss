@@ -15,6 +15,11 @@ public class DeserializationTests
 
         chargingState.Should().NotBeNull();
         chargingState?.BatteryLevel.Should().Be(96);
+        chargingState?.BatteryRange.Should().BeGreaterOrEqualTo(266.26f);
+        chargingState?.ChargeEnergyAdded.Should().BeGreaterOrEqualTo(55.67f);
+        chargingState?.ChargingState.Should().Be("Complete");
+        chargingState?.Timestamp.Should().BeBefore(DateTimeOffset.UtcNow);
+        chargingState?.UsableBatteryLevel.Should().BeGreaterOrEqualTo(90);
     }
 
     [Fact]
@@ -22,12 +27,12 @@ public class DeserializationTests
     {
         string json = File.ReadAllText("Data/drive_state.json");
         
-        var chargingState = JsonSerializer.Deserialize<VehicleDriveState>(json);
+        var driveState = JsonSerializer.Deserialize<VehicleDriveState>(json);
 
-        chargingState.Should().NotBeNull();
-        chargingState?.Speed.Should().BeNull();
-        chargingState?.Power.Should().BeNull();
-        chargingState?.Timestamp.Should().BeBefore(DateTimeOffset.UtcNow);
+        driveState.Should().NotBeNull();
+        driveState?.Speed.Should().BeNull();
+        driveState?.Power.Should().Be(0f);
+        driveState?.Timestamp.Should().BeBefore(DateTimeOffset.UtcNow);
     }
 
     [Fact]
@@ -35,9 +40,20 @@ public class DeserializationTests
     {
         string json = File.ReadAllText("Data/gui_settings.json");
         
-        var chargingState = JsonSerializer.Deserialize<VehicleGuiSettings>(json);
+        var guiSettings = JsonSerializer.Deserialize<VehicleGuiSettings>(json);
 
-        chargingState.Should().NotBeNull();
-        chargingState?.Timestamp.Should().BeBefore(DateTimeOffset.UtcNow);
+        guiSettings.Should().NotBeNull();
+        guiSettings?.Timestamp.Should().BeBefore(DateTimeOffset.UtcNow);
+    }
+
+    [Fact]
+    public void DeserializeVehicleStateTest()
+    {
+        string json = File.ReadAllText("Data/vehicle_state.json");
+        
+        var state = JsonSerializer.Deserialize<VehicleState>(json);
+
+        state.Should().NotBeNull();
+        state?.Timestamp.Should().BeBefore(DateTimeOffset.UtcNow);
     }
 }

@@ -148,7 +148,7 @@ public class VehicleChargeState
 
     [JsonPropertyName("scheduled_departure_time")]
     [JsonConverter(typeof(TimestampToDateTimeOffsetJsonConverter))]
-    public DateTimeOffset ScheduledDepartureTime { get; set; }
+    public DateTimeOffset? ScheduledDepartureTime { get; set; }
 
     [JsonPropertyName("scheduled_departure_time_minutes")]
     public int? ScheduledDepartureTimeMinutes { get; set; }
@@ -161,7 +161,7 @@ public class VehicleChargeState
 
     [JsonPropertyName("timestamp")]
     [JsonConverter(typeof(TimestampToDateTimeOffsetJsonConverter))]
-    public DateTimeOffset Timestamp { get; set; }
+    public DateTimeOffset? Timestamp { get; set; }
 
     [JsonPropertyName("trip_charging")]
     public bool TripCharging { get; set; }

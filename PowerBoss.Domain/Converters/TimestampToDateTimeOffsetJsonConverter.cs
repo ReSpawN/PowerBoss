@@ -14,12 +14,12 @@ public class TimestampToDateTimeOffsetJsonConverter : JsonConverter<DateTimeOffs
 
         if (x < UnixMinSeconds)
         {
-            x = x * 1000;
+            x *= 1000;
         }
 
         if (x >= UnixMaxSeconds)
         {
-            x = x / 1000;
+            x /= 1000;
         }
 
         return DateTimeOffset.FromUnixTimeSeconds(x);

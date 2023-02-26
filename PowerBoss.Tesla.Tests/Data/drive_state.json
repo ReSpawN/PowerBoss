@@ -1,19 +1,17 @@
 ﻿{
-	"response": {
-		"active_route_latitude": 52.2394,
-		"active_route_longitude": 5.980686,
-		"active_route_traffic_minutes_delay": 0.0,
-		"gps_as_of": 1677324349,
-		"heading": 115,
-		"latitude": 52.244343,
-		"longitude": 6.208511,
-		"native_latitude": 52.244343,
-		"native_location_supported": 1,
-		"native_longitude": 6.208511,
-		"native_type": "wgs",
-		"power": 0,
-		"shift_state": null,
-		"speed": null,
-		"timestamp": 1677324351322
-	}
+	"active_route_latitude": 52.2394,
+	"active_route_longitude": 5.980686,
+	"active_route_traffic_minutes_delay": 0.0,
+	"gps_as_of": 1677324349,
+	"heading": 115,
+	"latitude": 52.244343,
+	"longitude": 6.208511,
+	"native_latitude": 52.244343,
+	"native_location_supported": 1,
+	"native_longitude": 6.208511,
+	"native_type": "wgs",
+	"power": 0,
+	"shift_state": null,
+	"speed": null,
+	"timestamp": 1677324351322
 }

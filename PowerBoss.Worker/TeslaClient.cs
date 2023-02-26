@@ -79,4 +79,20 @@ public class TeslaClient
 
         return response?.Settings;
     }
+
+    public async Task<VehicleState?> GetVehicleState(VehicleSynopsis vehicle, CancellationToken token = default) =>
+        await GetVehicleState(vehicle.Id, token);
+
+    public async Task<VehicleState?> GetVehicleState(long? vehicleId, CancellationToken token = default)
+    {
+        HttpResponseMessage httpResponse = await _client.GetAsync($"vehicles/{vehicleId}/data_request/vehicle_state", token);
+        httpResponse.EnsureSuccessStatusCode();
+
+        var response = await JsonSerializer.DeserializeAsync<VehicleStateResponse>(
+            await httpResponse.Content.ReadAsStreamAsync(token),
+            cancellationToken: token
+        );
+
+        return response?.State;
+    }
 }

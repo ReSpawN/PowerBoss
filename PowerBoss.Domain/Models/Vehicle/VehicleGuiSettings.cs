@@ -25,5 +25,5 @@ public class VehicleGuiSettings
 
     [JsonPropertyName("timestamp")]
     [JsonConverter(typeof(TimestampToDateTimeOffsetJsonConverter))]
-    public DateTimeOffset Timestamp { get; set; }
+    public DateTimeOffset? Timestamp { get; set; }
 }

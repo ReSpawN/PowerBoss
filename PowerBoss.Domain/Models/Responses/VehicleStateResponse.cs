@@ -3,6 +3,7 @@ using PowerBoss.Domain.Models.Vehicle;
 
 namespace PowerBoss.Domain.Models.Responses;
 
-public class VehicleDriveStateResponse : DefaultStateResponseBase<VehicleDriveState>
+public class VehicleStateResponse : DefaultStateResponseBase<VehicleState>
 {
+    
 }

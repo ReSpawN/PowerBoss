@@ -16,7 +16,7 @@ public class VehicleDriveState
 
     [JsonPropertyName("gps_as_of")]
     [JsonConverter(typeof(TimestampToDateTimeOffsetJsonConverter))]
-    public DateTimeOffset GpsAsOf { get; set; }
+    public DateTimeOffset? GpsAsOf { get; set; }
 
     [JsonPropertyName("heading")]
     public float? Heading { get; set; }
@@ -50,5 +50,5 @@ public class VehicleDriveState
 
     [JsonPropertyName("timestamp")]
     [JsonConverter(typeof(TimestampToDateTimeOffsetJsonConverter))]
-    public DateTimeOffset Timestamp { get; set; }
+    public DateTimeOffset? Timestamp { get; set; }
 }

@@ -1,19 +1,12 @@
-using System.Net.Http.Headers;
-using System.Text.Json;
-using System.Web;
-using Ardalis.GuardClauses;
-using Microsoft.AspNetCore.WebUtilities;
-using PowerBoss.Domain.Models;
 using PowerBoss.Domain.Models.Vehicle;
-using TeslaAuth;
 
 namespace PowerBoss.Worker;
 
 public class Worker : BackgroundService
 {
-    private readonly ILogger<Worker> _logger;
     private readonly TeslaClient _client;
-    private readonly IHttpClientFactory _clientFactory;
+    private readonly ILogger<Worker> _logger;
+
     public Worker(ILogger<Worker> logger, TeslaClient client)
     {
         _logger = logger;
@@ -27,10 +20,9 @@ public class Worker : BackgroundService
         foreach (VehicleSynopsis vehicle in vehicles)
         {
             // VehicleChargeState? chargeState = await _client.GetVehicleChargingState(vehicle, stoppingToken);
-            VehicleChargeState? driveState = await _client.GetVehicleDriveState(vehicle, stoppingToken);
+            // VehicleDriveState? driveState = await _client.GetVehicleDriveState(vehicle, stoppingToken);
+            VehicleGuiSettings? guiSettings = await _client.GetVehicleGuiSettings(vehicle, stoppingToken);
         }
-        
-       
 
         while (!stoppingToken.IsCancellationRequested)
         {

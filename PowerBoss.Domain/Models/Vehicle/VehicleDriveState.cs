@@ -5,13 +5,13 @@ namespace PowerBoss.Domain.Models.Vehicle;
 
 public class VehicleDriveState
 {
-    [JsonPropertyName("heading")]
+    [JsonPropertyName("active_route_latitude")]
     public double? ActiveRouteLatitude { get; set; }
 
-    [JsonPropertyName("heading")]
+    [JsonPropertyName("active_route_longitude")]
     public double? ActiveRouteLongitude { get; set; }
 
-    [JsonPropertyName("heading")]
+    [JsonPropertyName("active_route_traffic_minutes_delay")]
     public float? ActiveRouteTrafficMinutesDelay { get; set; }
 
     [JsonPropertyName("gps_as_of")]

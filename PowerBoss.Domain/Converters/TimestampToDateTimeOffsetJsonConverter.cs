@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PowerBoss.Domain.Converters;
@@ -15,12 +14,12 @@ public class TimestampToDateTimeOffsetJsonConverter : JsonConverter<DateTimeOffs
 
         if (x < UnixMinSeconds)
         {
-            x = (long) x * 1000;
+            x = x * 1000;
         }
 
         if (x >= UnixMaxSeconds)
         {
-            x = (long) x / 1000;
+            x = x / 1000;
         }
 
         return DateTimeOffset.FromUnixTimeSeconds(x);

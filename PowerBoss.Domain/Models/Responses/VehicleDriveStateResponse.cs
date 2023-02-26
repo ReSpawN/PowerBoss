@@ -6,6 +6,5 @@ namespace PowerBoss.Domain.Models.Responses;
 public class VehicleDriveStateResponse
 {
     [JsonPropertyName("response")]
-    public VehicleChargeState? State { get; set; }
-    
+    public VehicleDriveState? State { get; set; }
 }

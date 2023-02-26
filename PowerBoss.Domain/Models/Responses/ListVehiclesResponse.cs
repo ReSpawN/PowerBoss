@@ -7,7 +7,7 @@ public class ListVehiclesResponse
 {
     [JsonPropertyName("response")]
     public IEnumerable<VehicleSynopsis>? Vehicles { get; set; }
-    
+
     [JsonPropertyName("count")]
     public int Count { get; set; }
 }

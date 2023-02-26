@@ -3,8 +3,8 @@ using PowerBoss.Domain.Models.Vehicle;
 
 namespace PowerBoss.Domain.Models.Responses;
 
-public class VehicleChargeStateResponse
+public class VehicleGuiSettingsResponse
 {
     [JsonPropertyName("response")]
-    public VehicleChargeState? State { get; set; }
+    public VehicleGuiSettings? Settings { get; set; }
 }

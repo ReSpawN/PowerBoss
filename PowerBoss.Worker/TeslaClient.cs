@@ -46,6 +46,7 @@ public class TeslaClient
     public async Task<VehicleChargeState?> GetVehicleChargingState(long? vehicleId, CancellationToken token = default)
     {
         HttpResponseMessage httpResponse = await _client.GetAsync($"vehicles/{vehicleId}/data_request/charge_state", token);
+        httpResponse.EnsureSuccessStatusCode();
 
         var response = await JsonSerializer.DeserializeAsync<VehicleChargeStateResponse>(
             await httpResponse.Content.ReadAsStreamAsync(token),

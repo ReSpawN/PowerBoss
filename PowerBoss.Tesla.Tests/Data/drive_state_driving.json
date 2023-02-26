@@ -1,0 +1,21 @@
+﻿{
+  "active_route_destination": "Akkerstraat 28",
+  "active_route_energy_at_arrival": 80,
+  "active_route_latitude": 51.928931,
+  "active_route_longitude": 6.351552,
+  "active_route_miles_to_arrival": 22.093035,
+  "active_route_minutes_to_arrival": 24.372559,
+  "active_route_traffic_minutes_delay": 0.0,
+  "gps_as_of": 1677425985,
+  "heading": 103,
+  "latitude": 52.015269,
+  "longitude": 5.927227,
+  "native_latitude": 52.015269,
+  "native_location_supported": 1,
+  "native_longitude": 5.927227,
+  "native_type": "wgs",
+  "power": 13,
+  "shift_state": "D",
+  "speed": 63,
+  "timestamp": 1677425987202
+}

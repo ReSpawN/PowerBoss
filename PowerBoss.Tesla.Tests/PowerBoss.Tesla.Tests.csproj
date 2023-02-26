@@ -24,16 +24,16 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="Data\charge_state.json">
+        <None Update="Data\charge_state_charging.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <None Update="Data\drive_state.json">
+        <None Update="Data\drive_state_charging.json">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="Data\gui_settings.json">
+        <None Update="Data\gui_settings_charging_by_mark.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <None Update="Data\vehicle_state.json">
+        <None Update="Data\vehicle_state_charging.json">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
     </ItemGroup>

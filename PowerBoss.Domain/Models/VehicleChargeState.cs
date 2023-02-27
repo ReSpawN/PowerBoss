@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using PowerBoss.Domain.Converters;
 
-namespace PowerBoss.Domain.Models.Vehicle;
+namespace PowerBoss.Domain.Models;
 
 public class VehicleChargeState
 {

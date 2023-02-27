@@ -1,14 +1,14 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PowerBoss.Domain.Models.Vehicle;
+namespace PowerBoss.Domain.Models;
 
-public class VehicleSynopsis
+public class Vehicle
 {
     [JsonPropertyName("id")]
-    public long? Id { get; set; }
+    public long Id { get; set; }
 
     [JsonPropertyName("vehicle_id")]
-    public long? VehicleId { get; set; }
+    public long VehicleId { get; set; }
 
     [JsonPropertyName("vin")]
     public string? Vin { get; set; }
@@ -38,7 +38,7 @@ public class VehicleSynopsis
     public bool CalendarEnabled { get; set; }
 
     [JsonPropertyName("api_version")]
-    public int? ApiVersion { get; set; }
+    public int ApiVersion { get; set; }
 
     [JsonPropertyName("backseat_token")]
     public string? BackseatToken { get; set; }

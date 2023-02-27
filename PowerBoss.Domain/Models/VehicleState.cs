@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using PowerBoss.Domain.Converters;
 
-namespace PowerBoss.Domain.Models.Vehicle;
+namespace PowerBoss.Domain.Models;
 
 public class VehicleState
 {
@@ -9,16 +9,16 @@ public class VehicleState
     public int ApiVersion { get; set; }
 
     [JsonPropertyName("autopark_state_v2")]
-    public string AutoparkStateV2 { get; set; }
+    public string? AutoparkStateV2 { get; set; }
 
     [JsonPropertyName("autopark_style")]
-    public string AutoparkStyle { get; set; }
+    public string? AutoparkStyle { get; set; }
 
     [JsonPropertyName("calendar_supported")]
     public bool CalendarSupported { get; set; }
 
     [JsonPropertyName("car_version")]
-    public string CarVersion { get; set; }
+    public string? CarVersion { get; set; }
 
     [JsonPropertyName("center_display_state")]
     public CenterDisplayStateEnum CenterDisplayState { get; set; }
@@ -27,7 +27,7 @@ public class VehicleState
     public bool DashcamClipSaveAvailable { get; set; }
 
     [JsonPropertyName("dashcam_state")]
-    public string DashcamState { get; set; }
+    public string? DashcamState { get; set; }
 
     [JsonPropertyName("df")]
     [JsonConverter(typeof(IntToBooleanJsonConverter))]
@@ -38,10 +38,11 @@ public class VehicleState
     public bool DriverRearDoor { get; set; }
 
     [JsonPropertyName("fd_window")]
+    [JsonConverter(typeof(IntToBooleanJsonConverter))]
     public bool DriverFrontWindow { get; set; }
 
     [JsonPropertyName("feature_bitmask")]
-    public string FeatureBitmask { get; set; }
+    public string? FeatureBitmask { get; set; }
 
     [JsonPropertyName("fp_window")]
     [JsonConverter(typeof(IntToBooleanJsonConverter))]
@@ -55,7 +56,7 @@ public class VehicleState
     public bool IsUserPresent { get; set; }
 
     [JsonPropertyName("last_autopark_error")]
-    public string LastAutoparkError { get; set; }
+    public string? LastAutoparkError { get; set; }
 
     [JsonPropertyName("locked")]
     public bool Locked { get; set; }
@@ -105,11 +106,11 @@ public class VehicleState
     public bool RearTrunkLatch { get; set; }
 
     [JsonPropertyName("santa_mode")]
-    public int SantaMode { get; set; }
+    [JsonConverter(typeof(IntToBooleanJsonConverter))]
+    public bool SantaModeEnabled { get; set; }
 
     [JsonPropertyName("sentry_mode")]
-    [JsonConverter(typeof(IntToBooleanJsonConverter))]
-    public bool SentryMode { get; set; }
+    public bool SentryModeEnabled { get; set; }
 
     [JsonPropertyName("sentry_mode_available")]
     public bool SentryModeAvailable { get; set; }
@@ -201,10 +202,10 @@ public class VehicleState
     public bool ValetPinNeeded { get; set; }
 
     [JsonPropertyName("vehicle_name")]
-    public string VehicleName { get; set; }
+    public string? VehicleName { get; set; }
 
     [JsonPropertyName("vehicle_self_test_progress")]
-    public bool VehicleSelfTestProgress { get; set; }
+    public int VehicleSelfTestProgress { get; set; }
 
     [JsonPropertyName("vehicle_self_test_requested")]
     public bool VehicleSelfTestRequested { get; set; }

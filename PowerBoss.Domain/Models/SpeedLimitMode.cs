@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PowerBoss.Domain.Models.Vehicle;
+namespace PowerBoss.Domain.Models;
 
 public class SpeedLimitMode
 {

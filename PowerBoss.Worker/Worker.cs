@@ -1,5 +1,5 @@
-using PowerBoss.Domain.Models.Responses;
-using PowerBoss.Domain.Models.Vehicle;
+using PowerBoss.Domain.Models;
+using PowerBoss.Worker.Extensions;
 
 namespace PowerBoss.Worker;
 
@@ -16,17 +16,26 @@ public class Worker : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        IEnumerable<VehicleSynopsis> vehicles = await _client.GetVehicles(stoppingToken);
+        // await _client.RefreshToken(stoppingToken);
+        IEnumerable<Vehicle> vehicles = await _client.GetVehicles(stoppingToken);
 
-        foreach (VehicleSynopsis vehicle in vehicles)
+        foreach (Vehicle vehicle in vehicles)
         {
+            // VehicleChargeState? wake = await _client.CommandWake(vehicle, stoppingToken);
             // VehicleChargeState? chargeState = await _client.GetVehicleChargingState(vehicle, stoppingToken);
             // VehicleDriveState? driveState = await _client.GetVehicleDriveState(vehicle, stoppingToken);
             // VehicleGuiSettings? guiSettings = await _client.GetVehicleGuiSettings(vehicle, stoppingToken);
             // VehicleState? vehicleState = await _client.GetVehicleState(vehicle, stoppingToken);
-            CommandResponse? chargePortOpenState = await _client.CommandChargePortOpen(vehicle, stoppingToken);
-            await Task.Delay(2000, stoppingToken);
-            CommandResponse? chargePortCloseState = await _client.CommandChargePortClose(vehicle, stoppingToken);
+            // CommandResponse? commandFlashLights = await _client.CommandLightFlash(vehicle, stoppingToken);
+            // await Task.Delay(1000, stoppingToken);
+            // CommandResponse? chargePortOpenState = await _client.CommandChargePortOpen(vehicle, stoppingToken);
+            // await Task.Delay(2000, stoppingToken);
+            // CommandResponse? chargePortCloseState = await _client.CommandChargePortClose(vehicle, stoppingToken);
+            // await Task.Delay(1000, stoppingToken);
+            // await _client.CommandLightFlash(vehicle, stoppingToken);
+            // await _client.SetChargeLimit(vehicle, 80, stoppingToken);
+            // await _client.SetChargingAmps(vehicle, 80, stoppingToken);
+            await _client.SetScheduledCharging(vehicle, new TimeOnly(13, 37), stoppingToken);
         }
 
         while (!stoppingToken.IsCancellationRequested)

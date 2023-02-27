@@ -1,57 +1,62 @@
 using System.Text.Json;
 using FluentAssertions;
-using PowerBoss.Domain.Models.Vehicle;
+using PowerBoss.Domain.Models;
 
 namespace PowerBoss.Tesla.Tests;
 
+/// <summary>
+/// Tests whether various JSON payloads can be correctly mapped to their respective objects.
+/// </summary>
 public class DeserializationTests
 {
-    [Fact]
-    public void DeserializeChargeStateTest()
+    [Theory]
+    [InlineData("charging")]
+    [InlineData("driving")]
+    public void DeserializeChargeStateTest(string condition)
     {
-        string json = File.ReadAllText("Data/charge_state.json");
-        
-        var chargingState = JsonSerializer.Deserialize<VehicleChargeState>(json);
+        string json = File.ReadAllText($"Data/charge_state_{condition}.json");
+
+        VehicleChargeState? chargingState = JsonSerializer.Deserialize<VehicleChargeState>(json);
 
         chargingState.Should().NotBeNull();
-        chargingState?.BatteryLevel.Should().Be(96);
-        chargingState?.BatteryRange.Should().BeGreaterOrEqualTo(266.26f);
-        chargingState?.ChargeEnergyAdded.Should().BeGreaterOrEqualTo(55.67f);
-        chargingState?.ChargingState.Should().Be("Complete");
         chargingState?.Timestamp.Should().BeBefore(DateTimeOffset.UtcNow);
-        chargingState?.UsableBatteryLevel.Should().BeGreaterOrEqualTo(90);
     }
 
-    [Fact]
-    public void DeserializeDriveStateTest()
+    [Theory]
+    [InlineData("charging")]
+    [InlineData("driving")]
+    public void DeserializeDriveStateTest(string condition)
     {
-        string json = File.ReadAllText("Data/drive_state.json");
-        
-        var driveState = JsonSerializer.Deserialize<VehicleDriveState>(json);
+        string json = File.ReadAllText($"Data/drive_state_{condition}.json");
+
+        VehicleDriveState? driveState = JsonSerializer.Deserialize<VehicleDriveState>(json);
 
         driveState.Should().NotBeNull();
-        driveState?.Speed.Should().BeNull();
-        driveState?.Power.Should().Be(0f);
         driveState?.Timestamp.Should().BeBefore(DateTimeOffset.UtcNow);
     }
 
-    [Fact]
-    public void DeserializeGuiSettingsTest()
+    [Theory]
+    [InlineData("charging", "mark")]
+    [InlineData("driving", "natascha")]
+    public void DeserializeGuiSettingsTest(string condition, string driver)
     {
-        string json = File.ReadAllText("Data/gui_settings.json");
-        
-        var guiSettings = JsonSerializer.Deserialize<VehicleGuiSettings>(json);
+        string json = File.ReadAllText($"Data/gui_settings_{condition}_by_{driver}.json");
+
+        VehicleGuiSettings? guiSettings = JsonSerializer.Deserialize<VehicleGuiSettings>(json);
 
         guiSettings.Should().NotBeNull();
         guiSettings?.Timestamp.Should().BeBefore(DateTimeOffset.UtcNow);
     }
 
-    [Fact]
-    public void DeserializeVehicleStateTest()
+    [Theory]
+    [InlineData("charging")]
+    [InlineData("driving")]
+    [InlineData("idle")]
+    public void DeserializeVehicleStateTest(string condition)
     {
-        string json = File.ReadAllText("Data/vehicle_state.json");
-        
-        var state = JsonSerializer.Deserialize<VehicleState>(json);
+        string json = File.ReadAllText($"Data/vehicle_state_{condition}.json");
+
+        VehicleState? state = JsonSerializer.Deserialize<VehicleState>(json);
 
         state.Should().NotBeNull();
         state?.Timestamp.Should().BeBefore(DateTimeOffset.UtcNow);

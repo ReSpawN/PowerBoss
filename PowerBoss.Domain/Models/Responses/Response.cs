@@ -2,8 +2,8 @@
 
 namespace PowerBoss.Domain.Models.Responses;
 
-public abstract class DefaultStateResponseBase<TResponse>
+public class Response<T>
 {
     [JsonPropertyName("response")]
-    public TResponse? State { get; set; }
+    public T Data { get; set; }
 }

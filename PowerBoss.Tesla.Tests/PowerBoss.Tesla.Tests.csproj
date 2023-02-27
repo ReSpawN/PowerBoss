@@ -24,22 +24,50 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="Data\charge_state_charging.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Data\drive_state_charging.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Update="Data\gui_settings_charging_by_mark.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Data\vehicle_state_charging.json">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
+        <ProjectReference Include="..\PowerBoss.Domain\PowerBoss.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\PowerBoss.Domain\PowerBoss.Domain.csproj" />
+      <None Remove="Data\charge_state_charging.json" />
+      <Content Include="Data\charge_state_charging.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Data\charge_state_driving.json" />
+      <Content Include="Data\charge_state_driving.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Data\drive_state_charging.json" />
+      <Content Include="Data\drive_state_charging.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Data\drive_state_driving.json" />
+      <Content Include="Data\drive_state_driving.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Data\gui_settings_charging_by_mark.json" />
+      <Content Include="Data\gui_settings_charging_by_mark.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Data\gui_settings_driving_by_natascha.json" />
+      <Content Include="Data\gui_settings_driving_by_natascha.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Data\refresh_token.json" />
+      <Content Include="Data\refresh_token.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Data\vehicle_state_charging.json" />
+      <Content Include="Data\vehicle_state_charging.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Data\vehicle_state_driving.json" />
+      <Content Include="Data\vehicle_state_driving.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Data\vehicle_state_idle.json" />
+      <Content Include="Data\vehicle_state_idle.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

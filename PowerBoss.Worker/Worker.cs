@@ -1,3 +1,4 @@
+using PowerBoss.Domain.Interfaces;
 using PowerBoss.Infra.Api.Tesla.Models;
 using PowerBoss.Worker.Extensions;
 
@@ -6,16 +7,21 @@ namespace PowerBoss.Worker;
 public class Worker : BackgroundService
 {
     private readonly TeslaClient _client;
+    private readonly ITeslaVehicleRepository _repository;
     private readonly ILogger<Worker> _logger;
 
-    public Worker(ILogger<Worker> logger, TeslaClient client)
+    public Worker(ILogger<Worker> logger, TeslaClient client, ITeslaVehicleRepository repository)
     {
         _logger = logger;
         _client = client;
+        _repository = repository;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+
+        // _repository.GetCollection();
+        
         // await _client.RefreshToken(stoppingToken);
         IEnumerable<Vehicle> vehicles = await _client.GetVehicles(stoppingToken);
 

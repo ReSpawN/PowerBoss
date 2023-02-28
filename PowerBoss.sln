@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerBoss.Worker", "PowerBoss.Worker\PowerBoss.Worker.csproj", "{C09A8090-45E3-4765-A814-DD2469F05C80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerBoss.Tesla.Tests", "PowerBoss.Tesla.Tests\PowerBoss.Tesla.Tests.csproj", "{9E1CB6C7-8340-4125-BBAD-69129C7598FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerBoss.Infra.Api.Tesla.Tests", "PowerBoss.Infra.Api.Tesla.Tests\PowerBoss.Infra.Api.Tesla.Tests.csproj", "{9E1CB6C7-8340-4125-BBAD-69129C7598FD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerBoss.Infra.Api.Tesla", "PowerBoss.Infra.Api.Tesla\PowerBoss.Infra.Api.Tesla.csproj", "{A108F7BF-2EF1-4583-BE61-863F66268340}"
 EndProject
@@ -10,6 +10,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerBoss.Infra.Database.MongoDb", "PowerBoss.Infra.Database.MongoDb\PowerBoss.Infra.Database.MongoDb.csproj", "{9B0E7A10-E1A7-489E-AF42-F624A3675E56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerBoss.Domain", "PowerBoss.Domain\PowerBoss.Domain.csproj", "{363D3594-2F38-44E4-B4B8-C62DD738BBD0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1C8B47D9-7424-4378-B9EB-DB738993C5B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,5 +35,16 @@ Global
 		{A108F7BF-2EF1-4583-BE61-863F66268340}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A108F7BF-2EF1-4583-BE61-863F66268340}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A108F7BF-2EF1-4583-BE61-863F66268340}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B0E7A10-E1A7-489E-AF42-F624A3675E56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B0E7A10-E1A7-489E-AF42-F624A3675E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B0E7A10-E1A7-489E-AF42-F624A3675E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B0E7A10-E1A7-489E-AF42-F624A3675E56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{363D3594-2F38-44E4-B4B8-C62DD738BBD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{363D3594-2F38-44E4-B4B8-C62DD738BBD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{363D3594-2F38-44E4-B4B8-C62DD738BBD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{363D3594-2F38-44E4-B4B8-C62DD738BBD0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9E1CB6C7-8340-4125-BBAD-69129C7598FD} = {1C8B47D9-7424-4378-B9EB-DB738993C5B7}
 	EndGlobalSection
 EndGlobal

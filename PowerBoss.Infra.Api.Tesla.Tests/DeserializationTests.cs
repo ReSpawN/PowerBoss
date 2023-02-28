@@ -2,7 +2,7 @@ using System.Text.Json;
 using FluentAssertions;
 using PowerBoss.Infra.Api.Tesla.Models;
 
-namespace PowerBoss.Tesla.Tests;
+namespace PowerBoss.Infra.Api.Tesla.Tests;
 
 /// <summary>
 /// Tests whether various JSON payloads can be correctly mapped to their respective objects.

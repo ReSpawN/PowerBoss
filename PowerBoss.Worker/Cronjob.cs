@@ -1,5 +1,3 @@
-using PowerBoss.Domain.Models.Responses;
-
 namespace PowerBoss.Worker;
 
 public class Cronjob : BackgroundService

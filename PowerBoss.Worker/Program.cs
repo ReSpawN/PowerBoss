@@ -1,4 +1,4 @@
-using PowerBoss.Domain.Configuration;
+using PowerBoss.Infra.Api.Tesla.Configuration;
 using PowerBoss.Worker;
 
 IHost host = Host.CreateDefaultBuilder(args)

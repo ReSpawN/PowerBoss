@@ -1,6 +1,6 @@
 using System.Text.Json;
 using FluentAssertions;
-using PowerBoss.Domain.Models;
+using PowerBoss.Infra.Api.Tesla.Models;
 
 namespace PowerBoss.Tesla.Tests;
 

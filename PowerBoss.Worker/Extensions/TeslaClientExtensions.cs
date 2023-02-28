@@ -1,5 +1,5 @@
-﻿using PowerBoss.Domain.Models;
-using PowerBoss.Domain.Models.Responses;
+﻿using PowerBoss.Infra.Api.Tesla.Models;
+using PowerBoss.Infra.Api.Tesla.Models.Responses;
 
 namespace PowerBoss.Worker.Extensions;
 

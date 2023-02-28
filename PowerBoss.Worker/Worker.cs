@@ -1,4 +1,4 @@
-using PowerBoss.Domain.Models;
+using PowerBoss.Infra.Api.Tesla.Models;
 using PowerBoss.Worker.Extensions;
 
 namespace PowerBoss.Worker;

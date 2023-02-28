@@ -6,11 +6,11 @@ using System.Text.Json;
 using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
-using PowerBoss.Domain.Configuration;
-using PowerBoss.Domain.Exceptions;
-using PowerBoss.Domain.Models;
-using PowerBoss.Domain.Models.Requests;
-using PowerBoss.Domain.Models.Responses;
+using PowerBoss.Infra.Api.Tesla.Configuration;
+using PowerBoss.Infra.Api.Tesla.Exceptions;
+using PowerBoss.Infra.Api.Tesla.Models;
+using PowerBoss.Infra.Api.Tesla.Models.Requests;
+using PowerBoss.Infra.Api.Tesla.Models.Responses;
 
 namespace PowerBoss.Worker;
 

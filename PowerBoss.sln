@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerBoss.Worker", "PowerBo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerBoss.Tesla.Tests", "PowerBoss.Tesla.Tests\PowerBoss.Tesla.Tests.csproj", "{9E1CB6C7-8340-4125-BBAD-69129C7598FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerBoss.Domain", "PowerBoss.Domain\PowerBoss.Domain.csproj", "{A108F7BF-2EF1-4583-BE61-863F66268340}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerBoss.Infra.Api.Tesla", "PowerBoss.Infra.Api.Tesla\PowerBoss.Infra.Api.Tesla.csproj", "{A108F7BF-2EF1-4583-BE61-863F66268340}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{CA21A617-1E54-4DFC-AC4F-F7FCEF808F66}"
 	ProjectSection(SolutionItems) = preProject

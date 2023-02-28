@@ -24,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\PowerBoss.Domain\PowerBoss.Domain.csproj" />
+        <ProjectReference Include="..\PowerBoss.Infra.Api.Tesla\PowerBoss.Infra.Api.Tesla.csproj" />
     </ItemGroup>
 
     <ItemGroup>

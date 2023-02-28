@@ -2,7 +2,7 @@
 
 namespace PowerBoss.Infra.Database.MongoDb.Documents.Tesla;
 
-[Collection(name:"Santiago!")]
+[Collection]
 public class Vehicle
 {
     

@@ -17,7 +17,5 @@ public class TeslaVehicleRepository : RepositoryBase<Vehicle>, ITeslaVehicleRepo
 
     public async Task FindByUuid()
     {
-        
-        AsQueryable().Where()
     }
 }

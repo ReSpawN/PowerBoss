@@ -37,6 +37,13 @@ public class CollectionAttributeResolverTests
 
         comparison.Should().Throw<CollectionNameInvalidException>();
     }
+
+    [Fact]
+    public void GetCollectionNameFromAttributeRemovingDocumentSuffixTest()
+    {
+        CollectionAttributeResolver.Resolve<CollectionNameFromAttributeDocument>()
+            .Should().Be("CollectionNameFromAttribute");
+    }
 }
 
 internal class CollectionNameAttributeMissing
@@ -50,6 +57,11 @@ internal class CollectionNameFromClass
 
 [Database.MongoDb.Attributes.Collection("FromAttribute")]
 internal class CollectionNameFromAttribute
+{
+}
+
+[Database.MongoDb.Attributes.Collection]
+internal class CollectionNameFromAttributeDocument
 {
 }
 

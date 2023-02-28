@@ -43,11 +43,31 @@ public abstract class RepositoryBase<T>
 
         _client = new MongoClient(settings);
         _database = _client.GetDatabase(databaseName);
-        _collection = _database.GetCollection<T>(CollectionAttributeResolver.Resolve<T>());
+
+
+        _collection = GetCollection();
+        
+    }
+
+    private IMongoCollection<T> GetCollection()
+    {
+        string collectionName = CollectionAttributeResolver.Resolve<T>();
+
+        List<string>? names = _database.ListCollectionNames().ToList();
+
+        if (names is not null && names.Contains(collectionName))
+        {
+            return _database.GetCollection<T>(collectionName);
+        }
+
+        _database.CreateCollection(collectionName);
+        
+        return _database.GetCollection<T>(collectionName);
     }
 
     /// <summary>
     /// Query the repository's collection through a <a href="https://www.mongodb.com/docs/drivers/csharp/current/fundamentals/linq/#std-label-csharp-linq">LINQ</a> interface.
+    /// https://www.peerislands.io/timeseries/
     /// </summary>
     /// <returns></returns>
     protected IQueryable<T> AsQueryable(AggregateOptions? options = null)

@@ -1,4 +1,4 @@
-﻿using PowerBoss.Infra.Database.MongoDb.Attributes;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace PowerBoss.Infra.Database.MongoDb.Exceptions;
 
@@ -8,4 +8,8 @@ public class CollectionNameInvalidException : ArgumentException
         : base($"Invalid collection name {collectionName}. Please use alpha characters only.")
     {
     }
+
+    [DoesNotReturn]
+    private static void Throw(string collectionName) =>
+        throw new CollectionNameInvalidException(collectionName);
 }

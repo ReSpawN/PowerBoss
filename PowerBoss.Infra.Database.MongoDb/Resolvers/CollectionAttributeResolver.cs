@@ -20,11 +20,13 @@ public static class CollectionAttributeResolver
 
         Guard.Against.NullOrWhiteSpace(collectionName);
 
-        if (!Regex.Match(collectionName, "^[a-z]+$", RegexOptions.IgnoreCase).Success)
+        Match match = Regex.Match(collectionName, "^([a-z]+?)(?:Document)?$", RegexOptions.IgnoreCase);
+
+        if (!match.Success)
         {
             throw new CollectionNameInvalidException(collectionName);
         }
 
-        return collectionName;
+        return match.Groups.Values.FirstOrDefault(x => x.Value != collectionName)?.Value ?? collectionName;
     }
 }

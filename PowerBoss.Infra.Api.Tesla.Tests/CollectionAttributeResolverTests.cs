@@ -12,14 +12,14 @@ public class CollectionAttributeResolverTests
     public void GetCollectionNameFromClassTest()
     {
         CollectionAttributeResolver.Resolve<CollectionNameFromClass>()
-            .Should().Be(nameof(CollectionNameFromClass));
+            .Should().Be("collectionNameFromClass");
     }
 
     [Fact]
     public void GetCollectionNameFromAttributeTest()
     {
         CollectionAttributeResolver.Resolve<CollectionNameFromAttribute>()
-            .Should().Be("FromAttribute");
+            .Should().Be("fromAttribute");
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public class CollectionAttributeResolverTests
     public void GetCollectionNameFromAttributeRemovingDocumentSuffixTest()
     {
         CollectionAttributeResolver.Resolve<CollectionNameFromAttributeDocument>()
-            .Should().Be("CollectionNameFromAttribute");
+            .Should().Be("collectionNameFromAttribute");
     }
 }
 

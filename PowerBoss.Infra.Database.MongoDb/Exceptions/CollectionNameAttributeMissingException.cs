@@ -10,7 +10,7 @@ public class CollectionNameAttributeMissingException : Exception
     {
     }
 
-    public static void ThrowIfNull([NotNull] Collection? attribute)
+    public static void ThrowIfNull([NotNull] CollectionAttribute? attribute)
     {
         if (attribute is null)
         {

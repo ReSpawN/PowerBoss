@@ -1,4 +1,5 @@
 using PowerBoss.Domain.Interfaces;
+using PowerBoss.Domain.Models;
 using PowerBoss.Infra.Api.Tesla.Models;
 using PowerBoss.Worker.Extensions;
 
@@ -27,6 +28,10 @@ public class Worker : BackgroundService
 
         foreach (Vehicle vehicle in vehicles)
         {
+            await _repository.InsertOne(new VehicleModel()
+            {
+                Name = vehicle.DisplayName
+            }, stoppingToken);
             // VehicleChargeState? wake = await _client.CommandWake(vehicle, stoppingToken);
             // VehicleChargeState? chargeState = await _client.GetVehicleChargingState(vehicle, stoppingToken);
             // VehicleDriveState? driveState = await _client.GetVehicleDriveState(vehicle, stoppingToken);

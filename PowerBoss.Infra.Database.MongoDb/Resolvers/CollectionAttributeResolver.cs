@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Text.RegularExpressions;
 using Ardalis.GuardClauses;
+using CaseExtensions;
 using PowerBoss.Infra.Database.MongoDb.Attributes;
 using PowerBoss.Infra.Database.MongoDb.Exceptions;
 
@@ -11,8 +12,8 @@ public static class CollectionAttributeResolver
     public static string Resolve<T>()
     {
         Type type = typeof(T);
-        Collection? attribute = type
-            .GetCustomAttribute(typeof(Collection)) as Collection;
+        CollectionAttribute? attribute = type
+            .GetCustomAttribute(typeof(CollectionAttribute)) as CollectionAttribute;
 
         CollectionNameAttributeMissingException.ThrowIfNull(attribute);
 
@@ -20,13 +21,14 @@ public static class CollectionAttributeResolver
 
         Guard.Against.NullOrWhiteSpace(collectionName);
 
-        Match match = Regex.Match(collectionName, "^([a-z]+?)(?:Document)?$", RegexOptions.IgnoreCase);
+        Match match = Regex.Match(collectionName, "^([a-z_\\-]+?)(?:Document)?$", RegexOptions.IgnoreCase);
 
         if (!match.Success)
         {
             throw new CollectionNameInvalidException(collectionName);
         }
 
-        return match.Groups.Values.FirstOrDefault(x => x.Value != collectionName)?.Value ?? collectionName;
+        return (match.Groups.Values.FirstOrDefault(x => x.Value != collectionName)?.Value ?? collectionName)
+            .ToCamelCase();
     }
 }

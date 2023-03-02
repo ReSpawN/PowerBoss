@@ -1,11 +1,11 @@
 ﻿namespace PowerBoss.Infra.Database.MongoDb.Attributes;
 
 [AttributeUsage(AttributeTargets.Class)]
-public class Collection : Attribute
+public class DatabaseAttribute : Attribute
 {
     public string? Name { get; }
 
-    public Collection(string? name = null)
+    public DatabaseAttribute(string? name = null)
     {
         Name = name;
     }

@@ -14,6 +14,10 @@ namespace PowerBoss.Infra.Database.MongoDb.Repositories;
 
 /// <summary>
 ///     A repository base implementation supporting the <a href="https://www.mongodb.com/docs/drivers/csharp/current/fundamentals/logging/">MongoDb client</a>.
+///
+/// Naming conventions are fully supported. All naming strategies are the same, following the camelCase convention for Database, Collection and Field names.
+/// Note that each database is suffixed with "Db" (e.g. "TeslaDb")
+/// See <a href="https://www.mongodb.com/docs/manual/core/databases-and-collections/#databases">Database names</a> 
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public abstract class RepositoryBase<T>
@@ -23,7 +27,7 @@ public abstract class RepositoryBase<T>
     private readonly IMongoClient _client;
     private readonly IMongoDatabase _database;
 
-    protected RepositoryBase(IOptions<MongoDbOptions> dbOptions, string databaseName)
+    protected RepositoryBase(IOptions<MongoDbOptions> dbOptions)
     {
         ConventionRegistry.Register("Filter null values", new ConventionPack
         {
@@ -31,7 +35,7 @@ public abstract class RepositoryBase<T>
             new IgnoreIfNullConvention(true),
             new EnumRepresentationConvention(BsonType.String),
         }, _ => true);
-        
+
         using ILoggerFactory loggerFactory = LoggerFactory.Create(b =>
         {
             b.AddSimpleConsole();
@@ -42,11 +46,15 @@ public abstract class RepositoryBase<T>
         settings.LoggingSettings = new LoggingSettings(loggerFactory);
 
         _client = new MongoClient(settings);
-        _database = _client.GetDatabase(databaseName);
-
-
+        _database = GetDatabase();
         _collection = GetCollection();
-        
+    }
+
+    private IMongoDatabase GetDatabase()
+    {
+        string databaseName = DatabaseAttributeResolver.Resolve(GetType());
+
+        return _client.GetDatabase(databaseName+"Db");
     }
 
     private IMongoCollection<T> GetCollection()
@@ -61,7 +69,7 @@ public abstract class RepositoryBase<T>
         }
 
         _database.CreateCollection(collectionName);
-        
+
         return _database.GetCollection<T>(collectionName);
     }
 
@@ -76,7 +84,7 @@ public abstract class RepositoryBase<T>
         {
             Collation = new Collation("en", strength: CollationStrength.Primary)
         };
-        
+
         return _collection.AsQueryable(options);
     }
 }

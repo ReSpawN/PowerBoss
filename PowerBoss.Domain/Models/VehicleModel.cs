@@ -2,11 +2,20 @@
 
 public class VehicleModel
 {
-    public Guid? Guid { get; }
+    public required Ulid Guid { get; set; }
     public string? Name { get; set; }
+    
+    public required DateTimeOffset? CreatedOn { get; set; }
+    public DateTimeOffset? UpdatedOn { get; set; }
 
-    public VehicleModel()
+
+    public static VehicleModel CreateNew()
     {
-        Guid = new Guid();
+        return new VehicleModel
+        {
+            Guid = Ulid.NewUlid(),
+            CreatedOn = DateTimeOffset.UtcNow
+        };
     }
+
 }

@@ -1,7 +1,6 @@
-using PowerBoss.Domain.Interfaces;
 using PowerBoss.Infra.Api.Tesla.Configuration;
 using PowerBoss.Infra.Database.MongoDb.Configuration;
-using PowerBoss.Infra.Database.MongoDb.Repositories;
+using PowerBoss.Infra.Database.MongoDb.Extensions;
 using PowerBoss.Worker;
 
 IHost host = Host.CreateDefaultBuilder(args)
@@ -29,7 +28,8 @@ IHost host = Host.CreateDefaultBuilder(args)
 
         #region Database
 
-        services.AddSingleton<ITeslaVehicleRepository, TeslaVehicleRepository>();
+        services.AddMappers();
+        services.AddRepositories();
 
         #endregion
     })

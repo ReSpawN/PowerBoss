@@ -7,10 +7,14 @@ namespace PowerBoss.Infra.Database.MongoDb.Documents.Tesla;
 [Collection("vehicles")]
 public sealed class VehicleDocument
 {
-    public ObjectId Id { get; set; }
+    public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
 
     [BsonRepresentation(BsonType.String)]
-    public Guid Guid { get; set; }
+    public Ulid Guid { get; set; }
 
-    public string Name { get; set; }
+    public string? Name { get; set; }
+    
+    public DateTimeOffset CreatedOn { get; set; }
+    
+                                                                                                                                                                                                                                                                                                                                   public DateTimeOffset? UpdatedOn { get; set; }
 }

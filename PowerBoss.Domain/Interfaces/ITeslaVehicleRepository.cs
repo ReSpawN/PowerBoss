@@ -4,5 +4,5 @@ namespace PowerBoss.Domain.Interfaces;
 
 public interface ITeslaVehicleRepository
 {
-    public Task InsertOne(VehicleModel model, CancellationToken cancellationToken = default);
+    public Task<VehicleModel> InsertOne(VehicleModel model, CancellationToken cancellationToken = default);
 }

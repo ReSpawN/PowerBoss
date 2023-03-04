@@ -1,9 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <Nullable>enable</Nullable>
+        <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>11</LangVersion>
         <UserSecretsId>dotnet-PowerBoss.Worker-9C6AABED-48DF-4B32-B34E-A089FE584315</UserSecretsId>
     </PropertyGroup>
 

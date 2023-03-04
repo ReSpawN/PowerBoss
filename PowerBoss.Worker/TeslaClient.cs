@@ -91,12 +91,16 @@ public class TeslaClient
             );
         }
 
-        if (httpResponse.StatusCode == HttpStatusCode.RequestTimeout &&
-            req.Options.TryGetValue(new HttpRequestOptionsKey<long>("vehicleId"), out long vehicleId))
+        switch (httpResponse.StatusCode)
         {
-            // Attempt to wake the vehicle
-            await CommandWake(vehicleId, cancellationToken);
-            await Task.Delay(250, cancellationToken);
+            case HttpStatusCode.Unauthorized:
+                await RefreshToken(cancellationToken);
+                break;
+            case HttpStatusCode.RequestTimeout when req.Options.TryGetValue(new HttpRequestOptionsKey<long>("vehicleId"), out long vehicleId):
+                // Attempt to wake the vehicle
+                await CommandWake(vehicleId, cancellationToken);
+                await Task.Delay(250, cancellationToken);
+                break;
         }
 
         // @todo

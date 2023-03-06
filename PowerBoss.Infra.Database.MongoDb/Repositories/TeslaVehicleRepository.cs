@@ -2,6 +2,7 @@
 using AutoMapper;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using PowerBoss.Domain.Interfaces;
 using PowerBoss.Domain.Models;
 using PowerBoss.Infra.Database.MongoDb.Attributes;
@@ -20,10 +21,19 @@ public class TeslaVehicleRepository : RepositoryBase<VehicleDocument>, ITeslaVeh
         _mapper = mapper;
     }
 
+    public async Task<IEnumerable<VehicleModel>> FindAll()
+    {
+        List<VehicleDocument>? result = await AsQueryable()
+            .OrderByDescending(f => f.CreatedOn)
+            .ToListAsync();
+
+        return result.Select(d => _mapper.Map<VehicleModel>(d));
+    }
+
     public async Task<VehicleModel> InsertOne(VehicleModel model, CancellationToken cancellationToken = default)
     {
         VehicleDocument? document = _mapper.Map<VehicleDocument>(model);
-        
+
         // List<UpdateDefinition<VehicleDocument>> updateDefinitionList =
         //     document.GetType().GetProperties()
         //         .Select(x => Builders<VehicleDocument>.Update.Set(x.Name, x.GetValue(document))).ToList();
@@ -45,7 +55,6 @@ public class TeslaVehicleRepository : RepositoryBase<VehicleDocument>, ITeslaVeh
             document,
             new InsertOneOptions()
             {
-                
             }
         );
 

@@ -22,16 +22,16 @@ public class Worker : BackgroundService
     {
 
         // _repository.GetCollection();
+
+        // IEnumerable<VehicleModel> vehicles = await _repository.FindAll();
+        IEnumerable<Vehicle> vehicles = await _client.GetVehicles(stoppingToken);
         
         // await _client.RefreshToken(stoppingToken);
-        IEnumerable<Vehicle> vehicles = await _client.GetVehicles(stoppingToken);
+        // IEnumerable<Vehicle> vehicles = await _client.GetVehicles(stoppingToken);
 
         foreach (Vehicle vehicle in vehicles)
         {
-            // await _repository.InsertOne(new VehicleModel()
-            // {
-                // Name = vehicle.DisplayName
-            // }, stoppingToken);
+            await _repository.InsertOne(VehicleModel.CreateNew(vehicle.DisplayName), stoppingToken);
             // VehicleChargeState? wake = await _client.CommandWake(vehicle, stoppingToken);
             // VehicleChargeState? chargeState = await _client.GetVehicleChargingState(vehicle, stoppingToken);
             // VehicleDriveState? driveState = await _client.GetVehicleDriveState(vehicle, stoppingToken);

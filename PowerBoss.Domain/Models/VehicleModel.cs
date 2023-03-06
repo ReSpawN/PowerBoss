@@ -20,7 +20,7 @@ public class VehicleModel : BaseModel
         UpdatedOn = updatedOn;
     }
 
-    public static VehicleModel CreateNew(string name)
+    public static VehicleModel CreateNew(string? name)
     {
         Guard.Against.NullOrEmpty(name, nameof(name));
 

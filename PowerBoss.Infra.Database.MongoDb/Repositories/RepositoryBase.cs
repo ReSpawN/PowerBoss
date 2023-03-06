@@ -8,9 +8,11 @@ using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
+using MongoDB.Driver.Linq;
 using PowerBoss.Infra.Database.MongoDb.Attributes;
 using PowerBoss.Infra.Database.MongoDb.Configuration;
 using PowerBoss.Infra.Database.MongoDb.Resolvers;
+using PowerBoss.Infra.Database.MongoDb.Serializers;
 
 namespace PowerBoss.Infra.Database.MongoDb.Repositories;
 
@@ -47,9 +49,7 @@ public abstract class RepositoryBase<T>
         MongoClientSettings? settings = MongoClientSettings.FromConnectionString(dbOptions.Value.ToConnectionString());
         settings.LoggingSettings = new LoggingSettings(loggerFactory);
 
-        IDiscriminatorConvention? objectDiscriminatorConvention = BsonSerializer.LookupDiscriminatorConvention(typeof(object));
-        ObjectSerializer objectSerializer = new(objectDiscriminatorConvention, GuidRepresentation.Standard);
-        BsonSerializer.RegisterSerializer(objectSerializer);
+        BsonSerializer.RegisterSerializer(UlidSerializer.Instance.ValueType, UlidSerializer.Instance);
 
         _client = new MongoClient(settings);
         _database = GetDatabase();
@@ -84,7 +84,7 @@ public abstract class RepositoryBase<T>
     /// https://www.peerislands.io/timeseries/
     /// </summary>
     /// <returns></returns>
-    protected IQueryable<T> AsQueryable(AggregateOptions? options = null)
+    protected IMongoQueryable<T> AsQueryable(AggregateOptions? options = null)
     {
         options ??= new AggregateOptions()
         {

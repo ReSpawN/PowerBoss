@@ -41,7 +41,10 @@ public class MapperTests
             Id = ObjectId.GenerateNewId(),
             Name = "Tessy",
             Uuid = Ulid.NewUlid(),
-            CreatedOn = DateTimeOffset.UtcNow
+            CreatedOn = DateTimeOffset.UtcNow,
+            State = "asleep",
+            ExternalId = long.MaxValue,
+            IdentificationNumber = "bbaa9f94-73cd-427b-b5f3-0635eca27fcf"
         };
 
         VehicleModel? model = _mapper.Map<VehicleModel>(document);

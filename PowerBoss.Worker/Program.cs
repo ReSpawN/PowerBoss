@@ -30,6 +30,7 @@ IHost host = Host.CreateDefaultBuilder(args)
 
         services.AddMappers();
         services.AddRepositories();
+        // services.AddMongoServices();
 
         #endregion
     })

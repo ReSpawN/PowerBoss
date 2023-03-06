@@ -1,21 +1,43 @@
-﻿namespace PowerBoss.Domain.Models;
+﻿using Ardalis.GuardClauses;
 
-public class VehicleModel
+namespace PowerBoss.Domain.Models;
+
+public class VehicleModel : BaseModel
 {
-    public required Ulid Guid { get; set; }
-    public string? Name { get; set; }
-    
-    public required DateTimeOffset? CreatedOn { get; set; }
-    public DateTimeOffset? UpdatedOn { get; set; }
+    public string Name { get; private set; }
+    public DateTimeOffset? CreatedOn { get; private set; }
+    public DateTimeOffset? UpdatedOn { get; private set; }
 
-
-    public static VehicleModel CreateNew()
+    private VehicleModel(
+        Ulid uuid,
+        string name,
+        DateTimeOffset? createdOn = null,
+        DateTimeOffset? updatedOn = null
+    ) : base(uuid)
     {
-        return new VehicleModel
-        {
-            Guid = Ulid.NewUlid(),
-            CreatedOn = DateTimeOffset.UtcNow
-        };
+        Name = name;
+        CreatedOn = createdOn;
+        UpdatedOn = updatedOn;
     }
 
+    public static VehicleModel CreateNew(string name)
+    {
+        Guard.Against.NullOrEmpty(name, nameof(name));
+
+        return new VehicleModel(
+            uuid: Ulid.NewUlid(),
+            name: name,
+            createdOn: DateTimeOffset.UtcNow
+        );
+    }
+}
+
+public abstract class BaseModel
+{
+    public Ulid Uuid { get; private set; }
+
+    protected BaseModel(Ulid uuid)
+    {
+        Uuid = uuid;
+    }
 }

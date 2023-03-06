@@ -3,7 +3,9 @@ using Ardalis.GuardClauses;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
+using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
 using PowerBoss.Infra.Database.MongoDb.Attributes;
@@ -44,6 +46,10 @@ public abstract class RepositoryBase<T>
 
         MongoClientSettings? settings = MongoClientSettings.FromConnectionString(dbOptions.Value.ToConnectionString());
         settings.LoggingSettings = new LoggingSettings(loggerFactory);
+
+        IDiscriminatorConvention? objectDiscriminatorConvention = BsonSerializer.LookupDiscriminatorConvention(typeof(object));
+        ObjectSerializer objectSerializer = new(objectDiscriminatorConvention, GuidRepresentation.Standard);
+        BsonSerializer.RegisterSerializer(objectSerializer);
 
         _client = new MongoClient(settings);
         _database = GetDatabase();

@@ -23,15 +23,14 @@ public class MapperTests
     [Fact]
     public void ModelToDocumentTest()
     {
-        VehicleModel model = VehicleModel.CreateNew();
-        model.Name = "Tessy";
+        VehicleModel model = VehicleModel.CreateNew("Tessy");
         
         VehicleDocument? document = _mapper.Map<VehicleDocument>(model);
 
         document.Should().NotBeNull();
         document.Name.Should().Be(document.Name);
         document.Id.Should().NotBeNull().And.NotBe(ObjectId.Empty);
-        document.Guid.Should().Be(model.Guid);
+        document.Uuid.Should().Be(model.Uuid);
     }
 
     [Fact]
@@ -41,7 +40,7 @@ public class MapperTests
         {
             Id = ObjectId.GenerateNewId(),
             Name = "Tessy",
-            Guid = Ulid.NewUlid(),
+            Uuid = Ulid.NewUlid(),
             CreatedOn = DateTimeOffset.UtcNow
         };
 
@@ -49,6 +48,6 @@ public class MapperTests
 
         model.Should().NotBeNull();
         model.Name.Should().Be(document.Name);
-        model.Guid.Should().Be(document.Guid);
+        model.Uuid.Should().Be(document.Uuid);
     }
 }

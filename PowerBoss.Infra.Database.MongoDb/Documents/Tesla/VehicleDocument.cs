@@ -9,8 +9,9 @@ public sealed class VehicleDocument
 {
     public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
 
-    [BsonRepresentation(BsonType.String)]
-    public Ulid Guid { get; set; }
+    // [BsonRepresentation(BsonType.String)]
+    [BsonGuidRepresentation(GuidRepresentation.Standard)]
+    public Ulid Uuid { get; set; }
 
     public string? Name { get; set; }
     

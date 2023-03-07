@@ -7,16 +7,17 @@ namespace PowerBoss.Infra.Database.MongoDb.Configuration;
 
 public class MongoDbOptions
 {
+    private string? _connectionString;
     public const string Section = "MongoDb";
 
     [Required]
-    public string UserName { get; set; }
+    public required string UserName { get; set; }
 
     [Required]
-    public string Password { get; set; }
+    public required string Password { get; set; }
 
     [Required]
-    public string Host { get; set; }
+    public required string Host { get; set; }
 
     [Required]
     public int Port { get; set; } = 27017;
@@ -26,13 +27,23 @@ public class MongoDbOptions
 
     public IDictionary<string, object> Properties { get; set; }
 
-    public string ToConnectionString()
+    public string? ConnectionString
+    {
+        get
+        {
+            return _connectionString ??= ToConnectionString();
+        }
+
+        set => _connectionString = value;
+    }
+
+    private string ToConnectionString()
     {
         string connectionString = $"{Scheme}://{UserName}:{Password}@{Host}";
 
         if (!Scheme.Contains("+srv"))
             connectionString += $":{Port}";
-        
+
         return QueryHelpers.AddQueryString(connectionString, QueryStringConverter.ConvertToQueryHelperDictionary(Properties));
     }
 }

@@ -9,6 +9,7 @@ using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
 using MongoDB.Driver.Linq;
+using PowerBoss.Domain.Interfaces;
 using PowerBoss.Infra.Database.MongoDb.Attributes;
 using PowerBoss.Infra.Database.MongoDb.Configuration;
 using PowerBoss.Infra.Database.MongoDb.Resolvers;
@@ -27,33 +28,15 @@ namespace PowerBoss.Infra.Database.MongoDb.Repositories;
 public abstract class RepositoryBase<T>
     where T : class
 {
-    protected readonly IMongoCollection<T> _collection;
+    protected readonly IMongoCollection<T> Collection;
     private readonly IMongoClient _client;
     private readonly IMongoDatabase _database;
 
-    protected RepositoryBase(IOptions<MongoDbOptions> dbOptions)
+    protected RepositoryBase(IMongoClient client)
     {
-        ConventionRegistry.Register("Filter null values", new ConventionPack
-        {
-            new CamelCaseElementNameConvention(),
-            new IgnoreIfNullConvention(true),
-            new EnumRepresentationConvention(BsonType.String),
-        }, _ => true);
-
-        using ILoggerFactory loggerFactory = LoggerFactory.Create(b =>
-        {
-            b.AddSimpleConsole();
-            b.SetMinimumLevel(LogLevel.Debug);
-        });
-
-        MongoClientSettings? settings = MongoClientSettings.FromConnectionString(dbOptions.Value.ToConnectionString());
-        settings.LoggingSettings = new LoggingSettings(loggerFactory);
-
-        BsonSerializer.RegisterSerializer(UlidSerializer.Instance.ValueType, UlidSerializer.Instance);
-
-        _client = new MongoClient(settings);
+        _client = client;
         _database = GetDatabase();
-        _collection = GetCollection();
+        Collection = GetCollection();
     }
 
     private IMongoDatabase GetDatabase()
@@ -91,6 +74,6 @@ public abstract class RepositoryBase<T>
             Collation = new Collation("en", strength: CollationStrength.Primary)
         };
 
-        return _collection.AsQueryable(options);
+        return Collection.AsQueryable(options);
     }
 }

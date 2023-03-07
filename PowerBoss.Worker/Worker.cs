@@ -2,6 +2,7 @@ using PowerBoss.Domain.Interfaces;
 using PowerBoss.Domain.Models;
 using PowerBoss.Infra.Api.Tesla.Models;
 using PowerBoss.Worker.Extensions;
+using Vehicle = PowerBoss.Domain.Models.Vehicle;
 
 namespace PowerBoss.Worker;
 
@@ -20,18 +21,23 @@ public class Worker : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-
         // _repository.GetCollection();
 
         // IEnumerable<VehicleModel> vehicles = await _repository.FindAll();
-        IEnumerable<Vehicle> vehicles = await _client.GetVehicles(stoppingToken);
-        
+        IEnumerable<Infra.Api.Tesla.Models.Vehicle> vehicles = await _client.GetVehicles(stoppingToken);
+
         // await _client.RefreshToken(stoppingToken);
         // IEnumerable<Vehicle> vehicles = await _client.GetVehicles(stoppingToken);
 
-        foreach (Vehicle vehicle in vehicles)
+        foreach (Infra.Api.Tesla.Models.Vehicle vehicle in vehicles)
         {
-            await _repository.InsertOne(VehicleModel.CreateNew(vehicle.DisplayName), stoppingToken);
+            await _repository.InsertOne(Vehicle.CreateNew(
+                name: vehicle.DisplayName,
+                externalId: vehicle.VehicleId,
+                identificationNumber: vehicle.Vin,
+                state: vehicle.State
+            ), stoppingToken);
+            
             // VehicleChargeState? wake = await _client.CommandWake(vehicle, stoppingToken);
             // VehicleChargeState? chargeState = await _client.GetVehicleChargingState(vehicle, stoppingToken);
             // VehicleDriveState? driveState = await _client.GetVehicleDriveState(vehicle, stoppingToken);

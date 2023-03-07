@@ -7,6 +7,10 @@ public class UlidSerializer : IBsonSerializer<Ulid>
     private static UlidSerializer? _instance;
     public static IBsonSerializer Instance => _instance ??= new UlidSerializer();
 
+    private UlidSerializer()
+    {
+    }
+
     object IBsonSerializer.Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args) 
         => Deserialize(context, args);
 

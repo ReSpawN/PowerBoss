@@ -1,12 +1,9 @@
-﻿using System.Reflection;
-using AutoMapper;
-using Microsoft.Extensions.Options;
+﻿using AutoMapper;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using PowerBoss.Domain.Interfaces;
 using PowerBoss.Domain.Models;
 using PowerBoss.Infra.Database.MongoDb.Attributes;
-using PowerBoss.Infra.Database.MongoDb.Configuration;
 using PowerBoss.Infra.Database.MongoDb.Documents.Tesla;
 
 namespace PowerBoss.Infra.Database.MongoDb.Repositories;
@@ -16,52 +13,36 @@ public class TeslaVehicleRepository : RepositoryBase<VehicleDocument>, ITeslaVeh
 {
     private readonly IMapper _mapper;
 
-    public TeslaVehicleRepository(IOptions<MongoDbOptions> dbOptions, IMapper mapper) : base(dbOptions)
+    public TeslaVehicleRepository(IMongoClient client, IMapper mapper)
+        : base(client)
     {
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<VehicleModel>> FindAll()
+    public async Task<IEnumerable<Vehicle>> FindAll()
     {
         List<VehicleDocument>? result = await AsQueryable()
             .OrderByDescending(f => f.CreatedOn)
             .ToListAsync();
 
-        return result.Select(d => _mapper.Map<VehicleModel>(d));
+        return result.Select(d => _mapper.Map<Vehicle>(d));
     }
 
-    public async Task<VehicleModel> InsertOne(VehicleModel model, CancellationToken cancellationToken = default)
+    public async Task<Vehicle> InsertOne(Vehicle model, CancellationToken cancellationToken = default)
     {
         VehicleDocument? document = _mapper.Map<VehicleDocument>(model);
 
-        // List<UpdateDefinition<VehicleDocument>> updateDefinitionList =
-        //     document.GetType().GetProperties()
-        //         .Select(x => Builders<VehicleDocument>.Update.Set(x.Name, x.GetValue(document))).ToList();
-        //
-        // await _collection.UpdateOneAsync(
-        //     Builders<VehicleDocument>.Filter
-        //         .Eq(d => d.Id, document.Id),
-        //     Builders<VehicleDocument>.Update.Combine(updateDefinitionList)
-        //         .SetOnInsert(d => d.CreatedOn, DateTimeOffset.UtcNow)
-        //         .CurrentDate(d => d.UpdatedOn),
-        //     new UpdateOptions
-        //     {
-        //         IsUpsert = true
-        //     },
-        //     cancellationToken
-        // );
+        await Collection.InsertOneAsync(document, cancellationToken: cancellationToken);
 
-        await _collection.InsertOneAsync(
-            document,
-            new InsertOneOptions()
-            {
-            }
-        );
-
-        return _mapper.Map<VehicleModel>(document);
+        return _mapper.Map<Vehicle>(document);
     }
 
-    public async Task FindByUuid()
+    public async Task<Vehicle> FindByUlid(Ulid ulid)
     {
+        VehicleDocument document = await Collection.AsQueryable()
+            .Where(d => d.Ulid == ulid)
+            .FirstAsync();
+        
+        return _mapper.Map<Vehicle>(document);
     }
 }

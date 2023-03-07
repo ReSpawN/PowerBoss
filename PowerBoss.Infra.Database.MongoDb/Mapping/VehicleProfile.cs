@@ -8,7 +8,7 @@ public class VehicleProfile : Profile
 {
     public VehicleProfile()
     {
-        CreateMap<VehicleDocument, VehicleModel>()
+        CreateMap<VehicleDocument, Vehicle>()
             .ReverseMap()
             .ForMember(d => d.Id, expression => expression.Ignore());
     }

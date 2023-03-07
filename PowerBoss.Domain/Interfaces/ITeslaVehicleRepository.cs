@@ -4,6 +4,7 @@ namespace PowerBoss.Domain.Interfaces;
 
 public interface ITeslaVehicleRepository
 {
-    Task<VehicleModel> InsertOne(VehicleModel model, CancellationToken cancellationToken = default);
-    Task<IEnumerable<VehicleModel>> FindAll();
+    Task<Vehicle> InsertOne(Vehicle model, CancellationToken cancellationToken = default);
+    Task<Vehicle> FindByUlid(Ulid ulid);
+    Task<IEnumerable<Vehicle>> FindAll();
 }

@@ -11,12 +11,12 @@ public sealed class VehicleDocument
     public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
 
     [BsonElement(Order = 1)]
-    public required Ulid Uuid { get; set; }
+    public Ulid Ulid { get; set; }
 
-    public required string Name { get; set; }
-    public required long ExternalId { get; set; }
-    public required string State { get; set; }
-    public required string IdentificationNumber { get; set; }
+    public string Name { get; set; }
+    public long ExternalId { get; set; }
+    public string State { get; set; }
+    public string IdentificationNumber { get; set; }
 
     [BsonRepresentation(BsonType.String)]
     public required DateTimeOffset CreatedOn { get; set; }

@@ -9,7 +9,6 @@ using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
 using MongoDB.Driver.Linq;
-using PowerBoss.Domain.Interfaces;
 using PowerBoss.Infra.Database.MongoDb.Attributes;
 using PowerBoss.Infra.Database.MongoDb.Configuration;
 using PowerBoss.Infra.Database.MongoDb.Resolvers;

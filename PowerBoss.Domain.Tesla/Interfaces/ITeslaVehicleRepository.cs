@@ -1,6 +1,6 @@
-﻿using PowerBoss.Domain.Models;
+﻿using PowerBoss.Domain.Tesla.Models;
 
-namespace PowerBoss.Domain.Interfaces;
+namespace PowerBoss.Domain.Tesla.Interfaces;
 
 public interface ITeslaVehicleRepository
 {

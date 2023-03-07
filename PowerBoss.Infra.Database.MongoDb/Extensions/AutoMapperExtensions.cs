@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PowerBoss.Domain.Interfaces;
-using PowerBoss.Domain.Models;
+using PowerBoss.Domain.Tesla.Interfaces;
 using PowerBoss.Infra.Database.MongoDb.Documents.Tesla;
 using PowerBoss.Infra.Database.MongoDb.Repositories;
 

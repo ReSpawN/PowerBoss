@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Mongo2Go;
 using MongoDB.Driver;
-using PowerBoss.Domain.Interfaces;
+using PowerBoss.Domain.Tesla.Interfaces;
 using PowerBoss.Infra.Database.MongoDb.Configuration;
 using PowerBoss.Infra.Database.MongoDb.Extensions;
 using PowerBoss.Infra.Database.MongoDb.Repositories;

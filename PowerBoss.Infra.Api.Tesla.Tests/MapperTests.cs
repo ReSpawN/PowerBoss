@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using MongoDB.Bson;
-using PowerBoss.Domain.Models;
+using PowerBoss.Domain.Tesla.Models;
 using PowerBoss.Infra.Database.MongoDb.Documents.Tesla;
 using PowerBoss.Infra.Database.MongoDb.Mapping;
 

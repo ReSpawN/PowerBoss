@@ -1,8 +1,7 @@
-using PowerBoss.Domain.Interfaces;
-using PowerBoss.Domain.Models;
+using PowerBoss.Domain.Tesla.Interfaces;
 using PowerBoss.Infra.Api.Tesla.Models;
 using PowerBoss.Worker.Extensions;
-using Vehicle = PowerBoss.Domain.Models.Vehicle;
+using Vehicle = PowerBoss.Domain.Tesla.Models.Vehicle;
 
 namespace PowerBoss.Worker;
 

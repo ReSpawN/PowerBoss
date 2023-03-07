@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using MongoDB.Driver;
-using PowerBoss.Domain.Interfaces;
-using PowerBoss.Domain.Models;
+using PowerBoss.Domain.Tesla.Interfaces;
+using PowerBoss.Domain.Tesla.Models;
 using Xunit.Abstractions;
 
 namespace PowerBoss.Infra.Api.Tesla.Tests.Integration;

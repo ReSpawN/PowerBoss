@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using PowerBoss.Domain.Models;
+using PowerBoss.Domain.Tesla.Models;
 using PowerBoss.Infra.Database.MongoDb.Documents.Tesla;
 
 namespace PowerBoss.Infra.Database.MongoDb.Mapping;

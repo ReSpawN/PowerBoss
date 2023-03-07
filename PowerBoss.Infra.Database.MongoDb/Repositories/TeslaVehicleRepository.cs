@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
-using PowerBoss.Domain.Interfaces;
-using PowerBoss.Domain.Models;
+using PowerBoss.Domain.Tesla.Interfaces;
+using PowerBoss.Domain.Tesla.Models;
 using PowerBoss.Infra.Database.MongoDb.Attributes;
 using PowerBoss.Infra.Database.MongoDb.Documents.Tesla;
 

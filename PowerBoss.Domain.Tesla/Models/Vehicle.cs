@@ -1,6 +1,7 @@
 ﻿using Ardalis.GuardClauses;
+using PowerBoss.Domain.Models;
 
-namespace PowerBoss.Domain.Models;
+namespace PowerBoss.Domain.Tesla.Models;
 
 public sealed class Vehicle : ModelBase
 {

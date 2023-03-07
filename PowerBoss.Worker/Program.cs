@@ -4,7 +4,6 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
-using PowerBoss.Domain.Interfaces;
 using PowerBoss.Infra.Api.Tesla.Configuration;
 using PowerBoss.Infra.Database.MongoDb;
 using PowerBoss.Infra.Database.MongoDb.Configuration;

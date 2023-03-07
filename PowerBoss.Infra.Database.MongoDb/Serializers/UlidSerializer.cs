@@ -11,7 +11,7 @@ public class UlidSerializer : IBsonSerializer<Ulid>
     {
     }
 
-    object IBsonSerializer.Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args) 
+    object IBsonSerializer.Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
         => Deserialize(context, args);
 
     public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, object value)
@@ -28,9 +28,9 @@ public class UlidSerializer : IBsonSerializer<Ulid>
 
     public Type ValueType => typeof(Ulid);
 
-    public Ulid Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args) 
+    public Ulid Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
         => Ulid.Parse(context.Reader.ReadString());
 
-    public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, Ulid value) 
+    public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, Ulid value)
         => context.Writer.WriteString(value.ToString());
 }

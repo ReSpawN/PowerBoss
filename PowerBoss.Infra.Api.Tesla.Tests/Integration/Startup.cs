@@ -22,8 +22,7 @@ public class Startup
             .Configure(options => options.ConnectionString = runner.ConnectionString);
 
         services.AddMongoDb();
-        services.AddMappers();
-        
-        services.AddSingleton<ITeslaVehicleRepository, TeslaVehicleRepository>();
+        services.AddRepositories();
+        services.AddDocumentMappers();
     }
 }

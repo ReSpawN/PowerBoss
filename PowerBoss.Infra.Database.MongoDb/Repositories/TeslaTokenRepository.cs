@@ -9,21 +9,21 @@ using PowerBoss.Infra.Database.MongoDb.Documents.Tesla;
 namespace PowerBoss.Infra.Database.MongoDb.Repositories;
 
 [Database("tesla")]
-public sealed class TeslaVehicleRepository : RepositoryBase<VehicleDocument, Vehicle>, ITeslaVehicleRepository
+public sealed class TeslaTokenRepository : RepositoryBase<TokenDocument, Token>, ITeslaTokenRepository
 {
-    public TeslaVehicleRepository(
+    public TeslaTokenRepository(
         IMongoClient client,
         IMapper mapper
     ) : base(client, mapper)
     {
     }
 
-    public async Task<IEnumerable<Vehicle>> FindByDriverUlid(Ulid ulid)
+    public async Task<Token> FindByDriverUlid(Ulid ulid)
     {
-        List<VehicleDocument>? documents = await Collection.AsQueryable()
+        TokenDocument document = await Collection.AsQueryable()
             .Where(d => d.DriverUlid == ulid)
-            .ToListAsync();
+            .FirstAsync();
 
-        return documents.Select(_mapper.Map<Vehicle>);
+        return _mapper.Map<Token>(document);
     }
 }

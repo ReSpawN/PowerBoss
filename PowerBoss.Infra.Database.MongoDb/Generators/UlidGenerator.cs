@@ -6,11 +6,8 @@ public class UlidGenerator : IIdGenerator
 {
     public static UlidGenerator Instance { get; } = new();
 
-    public object GenerateId(object container, object document)
-    {
-        return Ulid.NewUlid();
-    }
+    public object GenerateId(object container, object document) => Ulid.NewUlid();
 
-    public bool IsEmpty(object id) 
-        => (Ulid)id == Ulid.Empty;
+    public bool IsEmpty(object id)
+        => (Ulid) id == Ulid.Empty;
 }

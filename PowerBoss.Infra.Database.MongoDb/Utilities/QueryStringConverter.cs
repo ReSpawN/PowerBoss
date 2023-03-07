@@ -19,5 +19,5 @@ public static class QueryStringConverter
 
                 return new KeyValuePair<string, string>(pair.Key, stringifyValue);
             })
-            .ToDictionary(pair => pair.Key, pair => pair.Value);
+            .ToDictionary(keySelector: pair => pair.Key, elementSelector: pair => pair.Value);
 }

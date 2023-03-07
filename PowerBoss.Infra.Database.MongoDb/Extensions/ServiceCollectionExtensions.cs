@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
@@ -7,7 +6,9 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
+using PowerBoss.Domain.Tesla.Interfaces;
 using PowerBoss.Infra.Database.MongoDb.Configuration;
+using PowerBoss.Infra.Database.MongoDb.Repositories;
 using PowerBoss.Infra.Database.MongoDb.Serializers;
 
 namespace PowerBoss.Infra.Database.MongoDb.Extensions;
@@ -40,5 +41,12 @@ public static class ServiceCollectionExtensions
 
             return new MongoClient(settings);
         });
+    }
+
+    public static void AddRepositories(this IServiceCollection services)
+    {
+        services.AddSingleton<ITeslaDriverRepository, TeslaDriverRepository>();
+        services.AddSingleton<ITeslaTokenRepository, TeslaTokenRepository>();
+        services.AddSingleton<ITeslaVehicleRepository, TeslaVehicleRepository>();
     }
 }

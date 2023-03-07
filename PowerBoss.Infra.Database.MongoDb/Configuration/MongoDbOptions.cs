@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.WebUtilities;
-using MongoDB.Driver;
 using PowerBoss.Infra.Database.MongoDb.Utilities;
 
 namespace PowerBoss.Infra.Database.MongoDb.Configuration;
 
 public class MongoDbOptions
 {
-    private string? _connectionString;
     public const string Section = "MongoDb";
+    private string? _connectionString;
 
     [Required]
     public required string UserName { get; set; }
@@ -29,10 +28,7 @@ public class MongoDbOptions
 
     public string? ConnectionString
     {
-        get
-        {
-            return _connectionString ??= ToConnectionString();
-        }
+        get { return _connectionString ??= ToConnectionString(); }
 
         set => _connectionString = value;
     }
@@ -42,7 +38,9 @@ public class MongoDbOptions
         string connectionString = $"{Scheme}://{UserName}:{Password}@{Host}";
 
         if (!Scheme.Contains("+srv"))
+        {
             connectionString += $":{Port}";
+        }
 
         return QueryHelpers.AddQueryString(connectionString, QueryStringConverter.ConvertToQueryHelperDictionary(Properties));
     }

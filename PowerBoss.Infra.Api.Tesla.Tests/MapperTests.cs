@@ -11,19 +11,16 @@ public class MapperTests
 {
     private readonly IMapper _mapper;
 
-    public MapperTests()
+    public MapperTests(IMapper mapper)
     {
-        MapperConfiguration config = new(cfg => { cfg.AddProfile<VehicleProfile>(); });
-
-        _mapper = config.CreateMapper();
-
-        config.AssertConfigurationIsValid();
+        _mapper = mapper;
     }
 
     [Fact]
     public void ModelToDocumentTest()
     {
         Vehicle model = Vehicle.CreateNew(
+            driverUlid: Ulid.NewUlid(),
             name: "Tessy",
             externalId: long.MaxValue,
             identificationNumber: "019cf016-1172-4728-92ed-fe9566450c25",
@@ -39,8 +36,8 @@ public class MapperTests
         document.ExternalId.Should().Be(model.ExternalId);
         document.IdentificationNumber.Should().Be(model.IdentificationNumber);
         document.State.Should().Be(model.State);
-        document.CreatedOn.Should().Be(model.CreatedOn);
-        document.UpdatedOn.Should().Be(model.UpdatedOn);
+        document.CreatedAt.Should().Be(model.CreatedAt);
+        document.UpdatedAt.Should().Be(model.UpdatedAt);
     }
 
     [Fact]
@@ -48,10 +45,11 @@ public class MapperTests
     {
         VehicleDocument document = new()
         {
+            DriverUlid = Ulid.NewUlid(),
             Id = ObjectId.GenerateNewId(),
             Name = "Tessy",
             Ulid = Ulid.NewUlid(),
-            CreatedOn = DateTimeOffset.UtcNow,
+            CreatedAt = DateTimeOffset.UtcNow,
             State = "asleep",
             ExternalId = long.MaxValue,
             IdentificationNumber = "bbaa9f94-73cd-427b-b5f3-0635eca27fcf"
@@ -65,7 +63,7 @@ public class MapperTests
         model.ExternalId.Should().Be(document.ExternalId);
         model.IdentificationNumber.Should().Be(document.IdentificationNumber);
         model.State.Should().Be(document.State);
-        model.CreatedOn.Should().Be(document.CreatedOn);
-        model.UpdatedOn.Should().Be(document.UpdatedOn);
+        model.CreatedAt.Should().Be(document.CreatedAt);
+        model.UpdatedAt.Should().Be(document.UpdatedAt);
     }
 }

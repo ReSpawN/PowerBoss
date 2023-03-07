@@ -3,17 +3,17 @@ namespace PowerBoss.Domain.Models;
 public abstract class ModelBase
 {
     public Ulid Ulid { get; }
-    public DateTimeOffset? CreatedOn { get; }
-    public DateTimeOffset? UpdatedOn { get; }
+    public DateTimeOffset? CreatedAt { get; }
+    public DateTimeOffset? UpdatedAt { get; protected set; }
 
     protected ModelBase(
         Ulid ulid,
-        DateTimeOffset? createdOn = null,
-        DateTimeOffset? updatedOn = null
+        DateTimeOffset? createdAt = null,
+        DateTimeOffset? updatedAt = null
     )
     {
         Ulid = ulid;
-        CreatedOn = createdOn;
-        UpdatedOn = updatedOn;
+        CreatedAt = createdAt;
+        UpdatedAt = updatedAt;
     }
 }

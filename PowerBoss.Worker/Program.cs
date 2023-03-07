@@ -1,14 +1,7 @@
-using Microsoft.Extensions.Options;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Conventions;
-using MongoDB.Driver;
-using MongoDB.Driver.Core.Configuration;
+using PowerBoss.Infra.Api.Tesla;
 using PowerBoss.Infra.Api.Tesla.Configuration;
-using PowerBoss.Infra.Database.MongoDb;
 using PowerBoss.Infra.Database.MongoDb.Configuration;
 using PowerBoss.Infra.Database.MongoDb.Extensions;
-using PowerBoss.Infra.Database.MongoDb.Serializers;
 using PowerBoss.Worker;
 
 IHost host = Host.CreateDefaultBuilder(args)
@@ -32,15 +25,13 @@ IHost host = Host.CreateDefaultBuilder(args)
             .ValidateDataAnnotations()
             .ValidateOnStart();
 
-        services.AddMongoDb();
-
         #endregion
 
         #region Database
 
-        services.AddMappers();
+        services.AddMongoDb();
         services.AddRepositories();
-        // services.AddMongoServices();
+        services.AddDocumentMappers();
 
         #endregion
     })

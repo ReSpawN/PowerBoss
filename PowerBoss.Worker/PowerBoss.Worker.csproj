@@ -15,11 +15,15 @@
         <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="7.0.0" />
         <PackageReference Include="System.Net.Http" Version="4.3.4" />
-        <PackageReference Include="TeslaAuth" Version="2.3.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\PowerBoss.Infra.Api.Tesla\PowerBoss.Infra.Api.Tesla.csproj" />
-        <ProjectReference Include="..\PowerBoss.Infra.Database.MongoDb\PowerBoss.Infra.Database.MongoDb.csproj" />
+      <Folder Include="Extensions" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\PowerBoss.Domain.Tesla\PowerBoss.Domain.Tesla.csproj" />
+      <ProjectReference Include="..\PowerBoss.Infra.Api.Tesla\PowerBoss.Infra.Api.Tesla.csproj" />
+      <ProjectReference Include="..\PowerBoss.Infra.Database.MongoDb\PowerBoss.Infra.Database.MongoDb.csproj" />
     </ItemGroup>
 </Project>

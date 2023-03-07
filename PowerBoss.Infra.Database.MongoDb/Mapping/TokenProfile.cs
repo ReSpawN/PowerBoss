@@ -4,11 +4,11 @@ using PowerBoss.Infra.Database.MongoDb.Documents.Tesla;
 
 namespace PowerBoss.Infra.Database.MongoDb.Mapping;
 
-public class VehicleProfile : Profile
+public class TokenProfile : Profile
 {
-    public VehicleProfile()
+    public TokenProfile()
     {
-        CreateMap<VehicleDocument, Vehicle>()
+        CreateMap<TokenDocument, Token>()
             .ReverseMap()
             .ForMember(destinationMember: d => d.Id, memberOptions: expression => expression.Ignore());
     }

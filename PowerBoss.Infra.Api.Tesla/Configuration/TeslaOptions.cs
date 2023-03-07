@@ -10,11 +10,5 @@ public class TeslaOptions
     public string? FunctionalEndpoint { get; set; }
 
     [Required]
-    public string? AccessToken { get; set; }
-
-    [Required]
-    public string? RefreshToken { get; set; }
-    
-    [Required]
     public string? AuthenticationEndpoint { get; set; }
 }

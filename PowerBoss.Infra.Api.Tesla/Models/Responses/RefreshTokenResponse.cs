@@ -16,7 +16,7 @@ public class RefreshTokenResponse
 
     [JsonPropertyName("expires_in")]
     [JsonConverter(typeof(IntToTimeSpanJsonConverter))]
-    public TimeSpan? ExpiresIn { get; set; }
+    public TimeSpan? ExpiresAfter { get; set; }
 
     [JsonPropertyName("token_type")]
     public string? TokenType { get; set; }

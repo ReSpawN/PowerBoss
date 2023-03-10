@@ -25,5 +25,6 @@
       <ProjectReference Include="..\PowerBoss.Domain.Tesla\PowerBoss.Domain.Tesla.csproj" />
       <ProjectReference Include="..\PowerBoss.Infra.Api.Tesla\PowerBoss.Infra.Api.Tesla.csproj" />
       <ProjectReference Include="..\PowerBoss.Infra.Database.MongoDb\PowerBoss.Infra.Database.MongoDb.csproj" />
+      <ProjectReference Include="..\PowerBoss.Infra.Serial.Solar\PowerBoss.Infra.Serial.Solar.csproj" />
     </ItemGroup>
 </Project>

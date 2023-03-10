@@ -2,13 +2,17 @@ using PowerBoss.Infra.Api.Tesla;
 using PowerBoss.Infra.Api.Tesla.Configuration;
 using PowerBoss.Infra.Database.MongoDb.Configuration;
 using PowerBoss.Infra.Database.MongoDb.Extensions;
+using PowerBoss.Infra.Serial.Solar;
+using PowerBoss.Infra.Serial.Solar.Configuration;
+using PowerBoss.Infra.Serial.Solar.Interfaces;
 using PowerBoss.Worker;
 
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
     {
-        services.AddHostedService<Worker>();
-        services.AddHostedService<Cronjob>();
+        // services.AddHostedService<Worker>();
+        // services.AddHostedService<Cronjob>();
+        services.AddHostedService<InverterService>();
         services.AddHttpClient();
 
         services.AddSingleton<TeslaClient>();
@@ -25,6 +29,11 @@ IHost host = Host.CreateDefaultBuilder(args)
             .ValidateDataAnnotations()
             .ValidateOnStart();
 
+        services.AddOptions<InverterOptions>()
+            .Bind(context.Configuration.GetRequiredSection(InverterOptions.Section))
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
+
         #endregion
 
         #region Database
@@ -32,6 +41,13 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddMongoDb();
         services.AddRepositories();
         services.AddDocumentMappers();
+
+        #endregion
+
+        #region Solar
+
+        // @todo factory pattern?
+        services.AddSingleton<IInverter, Inverter>();
 
         #endregion
     })

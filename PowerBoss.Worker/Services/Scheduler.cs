@@ -1,10 +1,10 @@
-namespace PowerBoss.Worker;
+﻿namespace PowerBoss.Worker.Services;
 
-public class Cronjob : BackgroundService
+public class Scheduler : BackgroundService
 {
-    private readonly ILogger<Cronjob> _logger;
+    private readonly ILogger<Scheduler> _logger;
 
-    public Cronjob(ILogger<Cronjob> logger)
+    public Scheduler(ILogger<Scheduler> logger)
     {
         _logger = logger;
     }

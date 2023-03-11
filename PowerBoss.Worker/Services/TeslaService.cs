@@ -3,7 +3,7 @@ using PowerBoss.Domain.Tesla.Models;
 using PowerBoss.Infra.Api.Tesla;
 using PowerBoss.Infra.Api.Tesla.Models.Responses;
 
-namespace PowerBoss.Worker;
+namespace PowerBoss.Worker.Services;
 
 public class TeslaService
 {

@@ -1,7 +1,7 @@
-using PowerBoss.Infra.Serial.Solar.Interfaces;
+﻿using PowerBoss.Infra.Serial.Solar.Interfaces;
 using PowerBoss.Infra.Serial.Solar.Models;
 
-namespace PowerBoss.Worker;
+namespace PowerBoss.Worker.Services;
 
 public class InverterService : BackgroundService
 {

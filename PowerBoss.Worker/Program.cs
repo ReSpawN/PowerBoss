@@ -5,13 +5,13 @@ using PowerBoss.Infra.Database.MongoDb.Extensions;
 using PowerBoss.Infra.Serial.Solar;
 using PowerBoss.Infra.Serial.Solar.Configuration;
 using PowerBoss.Infra.Serial.Solar.Interfaces;
-using PowerBoss.Worker;
+using PowerBoss.Worker.Services;
 
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
     {
         // services.AddHostedService<Worker>();
-        // services.AddHostedService<Cronjob>();
+        // services.AddHostedService<Scheduler>();
         services.AddHostedService<InverterService>();
         services.AddHttpClient();
 

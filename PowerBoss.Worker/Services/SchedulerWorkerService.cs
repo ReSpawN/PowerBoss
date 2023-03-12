@@ -1,10 +1,10 @@
 ﻿namespace PowerBoss.Worker.Services;
 
-public class Scheduler : BackgroundService
+public class SchedulerWorkerService : BackgroundService
 {
-    private readonly ILogger<Scheduler> _logger;
+    private readonly ILogger<SchedulerWorkerService> _logger;
 
-    public Scheduler(ILogger<Scheduler> logger)
+    public SchedulerWorkerService(ILogger<SchedulerWorkerService> logger)
     {
         _logger = logger;
     }
@@ -13,7 +13,7 @@ public class Scheduler : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            _logger.LogInformation("Cronjob running at: {time}", DateTimeOffset.Now);
+            _logger.LogDebug("Cronjob running at: {time}", DateTimeOffset.Now);
             await Task.Delay(1000, stoppingToken);
         }
     }

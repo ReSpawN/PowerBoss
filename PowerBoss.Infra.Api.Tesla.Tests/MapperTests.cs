@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using MongoDB.Bson;
+using PowerBoss.Domain.Solar.Models;
 using PowerBoss.Domain.Tesla.Models;
+using PowerBoss.Infra.Database.MongoDb.Documents.Inverter;
 using PowerBoss.Infra.Database.MongoDb.Documents.Tesla;
 using PowerBoss.Infra.Database.MongoDb.Mapping;
 
@@ -63,6 +65,25 @@ public class MapperTests
         model.ExternalId.Should().Be(document.ExternalId);
         model.IdentificationNumber.Should().Be(document.IdentificationNumber);
         model.State.Should().Be(document.State);
+        model.CreatedAt.Should().Be(document.CreatedAt);
+        model.UpdatedAt.Should().Be(document.UpdatedAt);
+    }
+
+    [Fact]
+    public void RegisterDocumentToRegisterModelTest()
+    {
+        RegisterDocument document = new()
+        {
+            Id = ObjectId.GenerateNewId(),
+            Phase = 103,
+            Ulid = Ulid.NewUlid(),
+            CreatedAt = DateTimeOffset.UtcNow,
+        };
+
+        Register? model = _mapper.Map<Register>(document);
+
+        model.Should().NotBeNull();
+        model.Ulid.Should().Be(document.Ulid);
         model.CreatedAt.Should().Be(document.CreatedAt);
         model.UpdatedAt.Should().Be(document.UpdatedAt);
     }

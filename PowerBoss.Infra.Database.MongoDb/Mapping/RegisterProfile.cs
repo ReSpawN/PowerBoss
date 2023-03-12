@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
-using PowerBoss.Domain.Tesla.Models;
-using PowerBoss.Infra.Database.MongoDb.Documents.Tesla;
+using PowerBoss.Domain.Solar.Models;
+using PowerBoss.Infra.Database.MongoDb.Documents.Inverter;
 // ReSharper disable UnusedType.Global
 
 namespace PowerBoss.Infra.Database.MongoDb.Mapping;
 
-public class TokenProfile : Profile
+public class RegisterProfile : Profile
 {
-    public TokenProfile()
+    public RegisterProfile()
     {
-        CreateMap<TokenDocument, Token>()
+        CreateMap<RegisterDocument, Register>()
             .ReverseMap()
             .ForMember(destinationMember: d => d.Id, memberOptions: expression => expression.Ignore());
     }

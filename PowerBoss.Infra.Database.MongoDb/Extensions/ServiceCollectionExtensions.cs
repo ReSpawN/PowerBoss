@@ -6,6 +6,7 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
+using PowerBoss.Domain.Solar.Interfaces;
 using PowerBoss.Domain.Tesla.Interfaces;
 using PowerBoss.Infra.Database.MongoDb.Configuration;
 using PowerBoss.Infra.Database.MongoDb.Repositories;
@@ -48,5 +49,6 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ITeslaDriverRepository, TeslaDriverRepository>();
         services.AddSingleton<ITeslaTokenRepository, TeslaTokenRepository>();
         services.AddSingleton<ITeslaVehicleRepository, TeslaVehicleRepository>();
+        services.AddSingleton<ISolarRegisterRepository, SolarRegisterRepository>();
     }
 }

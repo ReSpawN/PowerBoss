@@ -5,14 +5,14 @@ using PowerBoss.Infra.Api.Tesla.Models.Responses;
 
 namespace PowerBoss.Worker.Services;
 
-public class TeslaService
+public class TeslaWorkerService
 {
     private readonly TeslaClient _client;
     private readonly ITeslaTokenRepository _tokenRepository;
     private readonly ITeslaDriverRepository _driverRepository;
     private readonly ITeslaVehicleRepository _vehicleRepository;
 
-    public TeslaService(
+    public TeslaWorkerService(
         TeslaClient client,
         ITeslaTokenRepository tokenRepository,
         ITeslaDriverRepository driverRepository,
@@ -25,6 +25,7 @@ public class TeslaService
         _vehicleRepository = vehicleRepository;
     }
 
+    // @todo this should be moved to the domain layer, not the background service
     public async Task NoNameYet(CancellationToken ct = default)
     {
         Driver driver = await _driverRepository.FindByUlid(Ulid.Parse("01GTY24DA2SDJRP21DRTBZMCE4"));

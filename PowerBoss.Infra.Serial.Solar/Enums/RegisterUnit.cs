@@ -4,15 +4,12 @@ public enum RegisterUnit
 {
     None,
     Amps,
-    VoltAmps,
     Volts,
     Watts,
     Hertz,
-    VA,
-    VAHours,
-    VAR,
-    VARHours,
+    Va,
+    Var,
     Percent,
     WattHours,
-    Celcius
+    Celsius
 }

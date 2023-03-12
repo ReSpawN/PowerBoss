@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PowerBoss.Domain.Tesla.Models;
 using PowerBoss.Infra.Database.MongoDb.Documents.Tesla;
+// ReSharper disable UnusedType.Global
 
 namespace PowerBoss.Infra.Database.MongoDb.Mapping;
 

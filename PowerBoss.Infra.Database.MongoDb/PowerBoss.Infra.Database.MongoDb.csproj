@@ -10,11 +10,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\PowerBoss.Domain.Solar\PowerBoss.Domain.Solar.csproj" />
       <ProjectReference Include="..\PowerBoss.Domain.Tesla\PowerBoss.Domain.Tesla.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Documents\Inverter" />
     </ItemGroup>
 
     <ItemGroup>

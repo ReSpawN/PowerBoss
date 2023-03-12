@@ -1,4 +1,4 @@
-﻿namespace PowerBoss.Domain.Tesla.Interfaces;
+﻿namespace PowerBoss.Domain.Interfaces;
 
 public interface IRepository<T>
 {

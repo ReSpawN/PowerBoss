@@ -2,12 +2,13 @@
 
 namespace PowerBoss.Infra.Serial.Solar.Attributes;
 
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Class, Inherited = false)]
 public class RegisterMappingAttribute : Attribute
 {
     public uint Address { get; }
     public RegisterType Type { get; }
     public RegisterUnit Unit { get; }
-    public RegisterAddressing Addressing { get; set; }
+    public RegisterAddressing Addressing { get; set; } = RegisterAddressing.Base1;
     public uint ScalingFactorAddress { get; set; }
     public uint Size { get; set; }
 
@@ -20,6 +21,11 @@ public class RegisterMappingAttribute : Attribute
 
     public RegisterMappingAttribute(Type declaringType)
     {
+        if (Address != 0 && Size != 0)
+        {
+            return;
+        }
+
         Type = RegisterType.Object;
         Unit = RegisterUnit.None;
 
@@ -37,6 +43,6 @@ public class RegisterMappingAttribute : Attribute
             .ToList();
 
         Address = addresses.Min();
-        Size = addresses.Max() - Address;
+        Size = addresses.Max() - Address + 1;
     }
 }

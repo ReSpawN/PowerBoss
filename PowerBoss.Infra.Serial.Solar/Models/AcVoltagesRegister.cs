@@ -3,24 +3,24 @@ using PowerBoss.Infra.Serial.Solar.Enums;
 
 namespace PowerBoss.Infra.Serial.Solar.Models;
 
-[RegisterMapping(40077, Size = 7)]
-public class AcVoltages 
+[RegisterMapping(typeof(AcVoltagesRegister))]
+public class AcVoltagesRegister
 {
     [RegisterMapping(40077, RegisterType.ScaledUInt16, RegisterUnit.Volts, ScalingFactorAddress = 40083)]
-    public float PhaseAB { get; set; }
+    public float PhaseABInVolts { get; set; }
 
     [RegisterMapping(40078, RegisterType.ScaledUInt16, RegisterUnit.Volts, ScalingFactorAddress = 40083)]
-    public float PhaseBC { get; set; }
+    public float PhaseBCInVolts { get; set; }
 
     [RegisterMapping(40079, RegisterType.ScaledUInt16, RegisterUnit.Volts, ScalingFactorAddress = 40083)]
-    public float PhaseCA { get; set; }
+    public float PhaseCAInVolts { get; set; }
 
     [RegisterMapping(40080, RegisterType.ScaledUInt16, RegisterUnit.Volts, ScalingFactorAddress = 40083)]
-    public float PhaseAN { get; set; }
+    public float PhaseANInVolts { get; set; }
 
     [RegisterMapping(40081, RegisterType.ScaledUInt16, RegisterUnit.Volts, ScalingFactorAddress = 40083)]
-    public float PhaseBN { get; set; }
+    public float PhaseBNInVolts { get; set; }
 
     [RegisterMapping(40082, RegisterType.ScaledUInt16, RegisterUnit.Volts, ScalingFactorAddress = 40083)]
-    public float PhaseCN { get; set; }
+    public float PhaseCNInVolts { get; set; }
 }

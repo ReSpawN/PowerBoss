@@ -23,7 +23,7 @@ public class RegisterMappingAttributeTests
     }
 }
 
-[RegisterMapping(typeof(Generation))]
+[RegisterMapping(typeof(GenerationRegister))]
 internal class RegisterMappingAddressRangeTest
 {
     [RegisterMapping(40094, RegisterType.ScaledAcc32, RegisterUnit.WattHours, ScalingFactorAddress = 40096)]
@@ -38,7 +38,7 @@ internal class RegisterMappingAddressRangeTest
     [RegisterMapping(40101, RegisterType.ScaledInt16, RegisterUnit.Watts, ScalingFactorAddress = 40102)]
     public float DcPowerInWatts { get; set; }
 
-    [RegisterMapping(40104, RegisterType.ScaledInt16, RegisterUnit.Celcius, ScalingFactorAddress = 40107)]
+    [RegisterMapping(40104, RegisterType.ScaledInt16, RegisterUnit.Celsius, ScalingFactorAddress = 40107)]
     public float HeatSinkTemperatureInCelsius { get; set; }
 
     [RegisterMapping(40108, RegisterType.UInt16)]

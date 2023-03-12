@@ -18,7 +18,7 @@ public static class ModbusClientExtensions
             ? (int) typeRegisterMapping.Address - 1
             : (int) typeRegisterMapping.Address;
 
-        int[]? x  = client.ReadHoldingRegisters(address, (int)typeRegisterMapping.Size);
+        int[]? x = client.ReadHoldingRegisters(address, (int) typeRegisterMapping.Size);
 
         return Converter.Instance.Read<T>(x.AsMemory());
     }

@@ -2,8 +2,8 @@ namespace PowerBoss.Domain.Models;
 
 public abstract class ModelBase
 {
-    public Ulid Ulid { get; }
-    public DateTimeOffset? CreatedAt { get; }
+    public Ulid Ulid { get; init; }
+    public DateTimeOffset? CreatedAt { get; init; }
     public DateTimeOffset? UpdatedAt { get; protected set; }
 
     protected ModelBase(

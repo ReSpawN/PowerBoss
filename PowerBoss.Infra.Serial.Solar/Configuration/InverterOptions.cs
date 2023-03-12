@@ -5,7 +5,7 @@ namespace PowerBoss.Infra.Serial.Solar.Configuration;
 public class InverterOptions
 {
     public const string Section = "Inverter";
-    
+
     [Required(AllowEmptyStrings = false, ErrorMessage = "The TCP IP address for the SolarEdge Inverter.")]
     public required string Address { get; set; }
 

@@ -20,8 +20,8 @@ public sealed class Converter
 
     private static T Cast<T>(object o) => (T) o;
 
-    private static int[] GetFromMemory(Memory<int> memory, uint baseAddress, uint registerAddress, int length = 1)
-        => memory.Slice((int) (registerAddress - baseAddress), length).ToArray();
+    private static int[] GetFromMemory(Memory<int> memory, uint baseAddress, uint registerAddress, uint length = 1)
+        => memory.Slice((int) (registerAddress - baseAddress), (int) length).ToArray();
 
     private uint ReadScaledAcc32(Memory<int> memory, uint baseAddress, RegisterMappingAttribute propertyRegisterMapping)
     {
@@ -48,7 +48,17 @@ public sealed class Converter
 
     private object ReadObject(Memory<int> memory, uint baseAddress, RegisterMappingAttribute propertyRegisterMapping, PropertyInfo property)
     {
-        Memory<int> span = GetFromMemory(memory, baseAddress, propertyRegisterMapping.Address);
+        RegisterMappingAttribute innerRegisterMapping = property.PropertyType.GetCustomAttributes(propertyRegisterMapping.GetType(), false)
+            .OfType<RegisterMappingAttribute>()
+            .Single();
+
+        if (innerRegisterMapping.Address != propertyRegisterMapping.Address)
+        {
+            throw new ArgumentOutOfRangeException(nameof(innerRegisterMapping.Size),
+                "The range from the inner property (class) differs from the one on the outer property (property).");
+        }
+
+        Memory<int> span = GetFromMemory(memory, baseAddress, innerRegisterMapping.Address, innerRegisterMapping.Size);
 
         object? result = GenericReadMethod.MakeGenericMethod(property.PropertyType)
             .Invoke(this, new object[]
@@ -114,6 +124,23 @@ public sealed class Converter
         return Convert.ToUInt32(registers.First());
     }
 
+    private T ReadRegister<T>(Memory<int> memory, uint baseAddress, T instance, PropertyInfo property, RegisterMappingAttribute registerMapping)
+    {
+        object value = ReadValue(memory, baseAddress, registerMapping, property);
+        object? castedValue = GenericCastMethod.MakeGenericMethod(property.PropertyType)
+            .Invoke(null, new[]
+            {
+                value
+            });
+
+        Guard.Against.Null(castedValue);
+
+        property.SetValue(instance, castedValue);
+
+        return instance;
+    }
+
+    // do something with it being an object that has a specific registerMappingAttribute
     private object ReadValue(Memory<int> memory, uint baseAddress, RegisterMappingAttribute registerMapping, PropertyInfo property)
         => registerMapping.Type switch
         {
@@ -131,22 +158,6 @@ public sealed class Converter
             RegisterType.UInt32 => ReadUInt32(memory, baseAddress, registerMapping.Address),
             _ => throw new NotSupportedException("Unknown register type")
         };
-
-    private T ReadRegister<T>(Memory<int> memory, uint baseAddress, T instance, PropertyInfo property, RegisterMappingAttribute registerMapping)
-    {
-        object value = ReadValue(memory, baseAddress, registerMapping, property);
-        object? castedValue = GenericCastMethod.MakeGenericMethod(property.PropertyType)
-            .Invoke(null, new[]
-            {
-                value
-            });
-
-        Guard.Against.Null(castedValue);
-
-        property.SetValue(instance, castedValue);
-
-        return instance;
-    }
 
     public T Read<T>(Memory<int> span)
     {

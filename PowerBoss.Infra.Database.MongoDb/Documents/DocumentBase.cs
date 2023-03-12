@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace PowerBoss.Infra.Database.MongoDb.Documents.Tesla;
+namespace PowerBoss.Infra.Database.MongoDb.Documents;
 
 public abstract class DocumentBase
 {

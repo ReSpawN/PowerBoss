@@ -1,33 +1,35 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Ardalis.GuardClauses;
+using AutoMapper;
 using EasyModbus;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PowerBoss.Domain.Solar.Events;
+using PowerBoss.Domain.Solar.Interfaces;
+using PowerBoss.Domain.Solar.Models;
 using PowerBoss.Infra.Serial.Solar.Configuration;
 using PowerBoss.Infra.Serial.Solar.Extensions;
-using PowerBoss.Infra.Serial.Solar.Interfaces;
 using PowerBoss.Infra.Serial.Solar.Models;
+#pragma warning disable CS8763
 
 namespace PowerBoss.Infra.Serial.Solar;
 
-public class Inverter : IInverter
+public class InverterClient : IInverterClient
 {
-    private const int SUNSPEC_COMMON_MODEL_REGISTER_ADDRESS_START = 40000;
-    private const int SUNSPEC_INVERTER_REGISTER_ADDRESS_START = 40069;
-    private const int SUNSPEC_METER_ONE_REGISTER_ADDRESS_START = 40122;
-    private const int SUNSPEC_SOLAR_EDGE_DC_POWER = 40100;
-    private readonly ILogger<Inverter> _logger;
-
     private readonly IOptions<InverterOptions> _options;
+    private readonly ILogger<InverterClient> _logger;
+    private readonly IMapper _mapper;
     private ModbusClient? _client;
 
-    public Inverter(
+    public InverterClient(
         IOptions<InverterOptions> options,
-        ILogger<Inverter> logger
+        ILogger<InverterClient> logger,
+        IMapper mapper
     )
     {
         _options = options;
         _logger = logger;
+        _mapper = mapper;
     }
 
     public event ConnectionEvent? Connected;
@@ -52,28 +54,60 @@ public class Inverter : IInverter
         {
             _logger.LogInformation($"Connecting to inverter at {_client.IPAddress}:{_client.Port}");
             _client.Connect();
+            _logger.LogInformation("Connected");
 
             return true;
         }
         catch (Exception)
         {
+            _logger.LogWarning("Failed to connect");
             return false;
         }
     }
 
     public void Disconnect()
     {
-        _logger.LogInformation("Disconnecting");
-
         if (_client is not null)
         {
+            _logger.LogInformation("Disconnecting");
+
             _client.Disconnect();
             _client = null;
+            
+            _logger.LogInformation("Disconnected");
         }
     }
 
+    public void Dispose()
+    {
+        ReleaseUnmanagedResources();
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    ///     Async wrapper for reading to prevent thread locking.
+    /// </summary>
+    public async Task<Register> ReadRegister()
+    {
+        InverterRegister register = await Task.Run(Read<InverterRegister>);
+
+        return _mapper.Map<Register>(register);
+    }
+
+    private T Read<T>()
+        where T : class
+    {
+        VerifyClientConnectionOrThrow(_client);
+
+        _logger.LogDebug($"Reading '{typeof(T).Name}' from inverter at {_client.IPAddress}:{_client.Port}");
+        T result = _client.Read<T>();
+        _logger.LogDebug($"Reading of '{typeof(T).Name}' successful");
+
+        return result;
+    }
+
     [DoesNotReturn]
-    private static void VerifyConnectionOrThrow([ValidatedNotNull] ModbusClient? client)
+    private static void VerifyClientConnectionOrThrow([ValidatedNotNull] ModbusClient? client)
     {
         if (client is null)
         {
@@ -84,35 +118,6 @@ public class Inverter : IInverter
         {
             throw new InvalidOperationException("The client is not connected.");
         }
-    }
-
-    public Task<float> GetCurrentGeneration()
-    {
-        VerifyConnectionOrThrow(_client);
-
-        int[] response = _client.ReadHoldingRegisters(SUNSPEC_SOLAR_EDGE_DC_POWER, 2);
-
-        double power = response[0] * Math.Pow(10, response[1]);
-
-        return Task.FromResult(Convert.ToSingle(power));
-    }
-
-    public Task<T> Get<T>()
-        where T : class
-    {
-        VerifyConnectionOrThrow(_client);
-
-        _logger.LogInformation($"Reading '{typeof(T).Name}' from inverter at {_client.IPAddress}:{_client.Port}");
-        T result = _client.Read<T>();
-        _logger.LogInformation($"Reading of '{typeof(T).Name}' successful");
-
-        return Task.FromResult(result);
-    }
-
-    public void Dispose()
-    {
-        ReleaseUnmanagedResources();
-        GC.SuppressFinalize(this);
     }
 
     private void ConnectionChanged(object sender)
@@ -128,16 +133,17 @@ public class Inverter : IInverter
         }
         else
         {
-            Connected?.Invoke(this);
+            Disconnected?.Invoke(this);
         }
     }
 
     private void ReleaseUnmanagedResources()
     {
+        _logger.LogInformation("Disconnecting through ReleaseUnmanagedResources");
         Disconnect();
     }
 
-    ~Inverter()
+    ~InverterClient()
     {
         ReleaseUnmanagedResources();
     }

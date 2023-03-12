@@ -2,6 +2,13 @@ namespace PowerBoss.Infra.Serial.Solar.Enums;
 
 public enum RegisterAddressing
 {
-    Base1,
-    Base0
+    /// <summary>
+    ///     MODBUS Protocol Address
+    /// </summary>
+    Base0,
+
+    /// <summary>
+    ///     MODBUS PLC Address
+    /// </summary>
+    Base1
 }

@@ -1,26 +1,27 @@
-﻿using PowerBoss.Infra.Serial.Solar.Attributes;
+﻿using PowerBoss.Domain.Solar.Enums;
+using PowerBoss.Infra.Serial.Solar.Attributes;
 using PowerBoss.Infra.Serial.Solar.Enums;
 
-namespace PowerBoss.Infra.Serial.Solar.Models;
+namespace PowerBoss.Infra.Serial.Solar.Dtos;
 
 /// <summary>
 ///     Model representation of the holding register range for the
 ///     <a href="https://www.solaredge.com/sites/default/files/sunspec-implementation-technical-note.pdf">SolarEdge Inverter</a>
 /// </summary>
-[RegisterMapping(typeof(InverterRegister))]
-public class InverterRegister
+[RegisterMapping(typeof(InverterRegisterDto))]
+public record InverterRegisterDto
 {
     [RegisterMapping(40070, RegisterType.UInt16, Size = 1)]
     public Phase Phase { get; set; }
 
     [RegisterMapping(40072)]
-    public AcCurrentRegister AcCurrentRegister { get; set; } = null!;
+    public AcCurrentRegisterDto AcCurrentRegister { get; set; } = null!;
 
     [RegisterMapping(40077)]
-    public AcVoltagesRegister AcVoltageRegister { get; set; } = null!;
+    public AcVoltagesRegisterDto AcVoltageRegister { get; set; } = null!;
 
     [RegisterMapping(40084)]
-    public GenerationRegister GenerationRegister { get; set; } = null!;
+    public GenerationRegisterDto GenerationRegister { get; set; } = null!;
 
     [RegisterMapping(40088, RegisterType.ScaledInt16, RegisterUnit.Va, ScalingFactorAddress = 40089)]
     public float ApparentPowerInVa { get; set; }

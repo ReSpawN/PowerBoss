@@ -27,19 +27,24 @@ public class DocumentTests
     [Fact]
     public async Task MongoConventionTest()
     {
-        Driver driver = Driver.CreateNew("Mark", "no-reply@domain.tld");
+        Driver driver = new()
+        {
+            Name = "Tessy",
+            Email = "tessy@cyntax.nl"
+        };
         Driver insertedDriverDocument = await _driverRepository.InsertOne(driver);
         Driver fetchedDriverDocument = await _driverRepository.FindByUlid(insertedDriverDocument.Ulid);
         
         insertedDriverDocument.Should().BeEquivalentTo(fetchedDriverDocument);
-        
-        Vehicle vehicle = Vehicle.CreateNew(
-            driverUlid: insertedDriverDocument.Ulid,
-            name: "TessyFromTest",
-            externalId: long.MaxValue,
-            identificationNumber: "019cf016-1172-4728-92ed-fe9566450c25",
-            state: "asleep"
-        );
+
+        Vehicle vehicle = new()
+        {
+            DriverUlid = insertedDriverDocument.Ulid,
+            Name = "TessyFromTest",
+            ExternalId = long.MaxValue,
+            IdentificationNumber = "019cf016-1172-4728-92ed-fe9566450c25",
+            State = "asleep"
+        };
         
         Vehicle insertedVehicleDocument = await _vehicleRepository.InsertOne(vehicle);
         Vehicle fetchedVehicleDocument = await _vehicleRepository.FindByUlid(vehicle.Ulid);

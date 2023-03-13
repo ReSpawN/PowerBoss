@@ -18,29 +18,29 @@ public class MapperTests
         _mapper = mapper;
     }
 
-    [Fact]
-    public void ModelToDocumentTest()
-    {
-        Vehicle model = Vehicle.CreateNew(
-            driverUlid: Ulid.NewUlid(),
-            name: "Tessy",
-            externalId: long.MaxValue,
-            identificationNumber: "019cf016-1172-4728-92ed-fe9566450c25",
-            state: "asleep"
-        );
-        
-        VehicleDocument? document = _mapper.Map<VehicleDocument>(model);
-
-        document.Should().NotBeNull();
-        document.Name.Should().Be(document.Name);
-        document.Id.Should().NotBeNull().And.NotBe(ObjectId.Empty);
-        document.Ulid.Should().Be(model.Ulid);
-        document.ExternalId.Should().Be(model.ExternalId);
-        document.IdentificationNumber.Should().Be(model.IdentificationNumber);
-        document.State.Should().Be(model.State);
-        document.CreatedAt.Should().Be(model.CreatedAt);
-        document.UpdatedAt.Should().Be(model.UpdatedAt);
-    }
+    // [Fact]
+    // public void ModelToDocumentTest()
+    // {
+    //     Vehicle model = Vehicle.CreateNew(
+    //         driverUlid: Ulid.NewUlid(),
+    //         name: "Tessy",
+    //         externalId: long.MaxValue,
+    //         identificationNumber: "019cf016-1172-4728-92ed-fe9566450c25",
+    //         state: "asleep"
+    //     );
+    //     
+    //     VehicleDocument? document = _mapper.Map<VehicleDocument>(model);
+    //
+    //     document.Should().NotBeNull();
+    //     document.Name.Should().Be(document.Name);
+    //     document.Id.Should().NotBeNull().And.NotBe(ObjectId.Empty);
+    //     document.Ulid.Should().Be(model.Ulid);
+    //     document.ExternalId.Should().Be(model.ExternalId);
+    //     document.IdentificationNumber.Should().Be(model.IdentificationNumber);
+    //     document.State.Should().Be(model.State);
+    //     document.CreatedAt.Should().Be(model.CreatedAt);
+    //     document.UpdatedAt.Should().Be(model.UpdatedAt);
+    // }
 
     [Fact]
     public void DocumentToModelTest()

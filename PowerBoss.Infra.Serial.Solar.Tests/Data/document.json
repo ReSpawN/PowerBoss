@@ -1,0 +1,33 @@
+﻿{
+	"id": {"oid": "640f78c83f64b4fdb1bc09b3"},
+	"acCurrent": {
+		"totalInAmps": 0,
+		"phaseAInAmps": 0,
+		"phaseBInAmps": 0,
+		"phaseCInAmps": 0
+	},
+	"acVoltage": {
+		"phaseABInVolts": 398.3999938964844,
+		"phaseBCInVolts": 397.8999938964844,
+		"phaseCAInVolts": 398.79998779296875,
+		"phaseANInVolts": 231,
+		"phaseBNInVolts": 229.3000030517578,
+		"phaseCNInVolts": 229.6999969482422
+	},
+	"apparentPowerInVa": 0,
+	"createdAt": "2023-03-13T19:26:00.2998332+00:00",
+	"generation": {
+		"acPowerInWatts": 0,
+		"acFrequencyInHertz": 50.040000915527344,
+		"powerFactorInPercent": 0,
+		"acLifetimeProductionInWatts": 7897678,
+		"dcCurrentInAmps": 0,
+		"dcVoltageInVolts": 0.30000001192092896,
+		"dcPowerInWatts": 0
+	},
+	"heatSinkTemperatureInCelsius": 28.68000030517578,
+	"operatingState": "Sleeping",
+	"phase": "ThreePhase",
+	"reactivePowerInVar": 0,
+	"ulid": "01GVE6ZKKBF8ETNWSQZW2V5PDD"
+}

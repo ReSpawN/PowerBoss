@@ -2,7 +2,7 @@ using PowerBoss.Domain.Interfaces;
 
 namespace PowerBoss.Domain.Models;
 
-public abstract class ModelBase : IIdentifiableModel
+public abstract record DtoBase : IIdentifiableModel
 {
     public Ulid Ulid { get; init; } = Ulid.NewUlid();
     public DateTimeOffset? CreatedAt { get; init; } = DateTimeOffset.UtcNow;

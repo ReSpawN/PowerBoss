@@ -1,10 +1,10 @@
 using PowerBoss.Infra.Serial.Solar.Attributes;
 using PowerBoss.Infra.Serial.Solar.Enums;
 
-namespace PowerBoss.Infra.Serial.Solar.Models;
+namespace PowerBoss.Infra.Serial.Solar.Dtos;
 
-[RegisterMapping(typeof(AcCurrentRegister))]
-public class AcCurrentRegister
+[RegisterMapping(typeof(AcCurrentRegisterDto))]
+public class AcCurrentRegisterDto
 {
     [RegisterMapping(40072, RegisterType.ScaledUInt16, RegisterUnit.Amps, ScalingFactorAddress = 40076)]
     public float TotalInAmps { get; set; }

@@ -1,14 +1,15 @@
-﻿using PowerBoss.Infra.Serial.Solar.Attributes;
+﻿using PowerBoss.Domain.Solar.Enums;
+using PowerBoss.Infra.Serial.Solar.Attributes;
 using PowerBoss.Infra.Serial.Solar.Enums;
 
-namespace PowerBoss.Infra.Serial.Solar.Models;
+namespace PowerBoss.Infra.Serial.Solar.Dtos;
 
 /// <summary>
 ///     Model representation of the holding register range for the
 ///     <a href="https://www.solaredge.com/sites/default/files/sunspec-implementation-technical-note.pdf">SolarEdge Inverter</a>
 /// </summary>
-[RegisterMapping(typeof(GenerationRegister))]
-public class GenerationRegister
+[RegisterMapping(typeof(GenerationRegisterDto))]
+public class GenerationRegisterDto
 {
     [RegisterMapping(40084, RegisterType.ScaledInt16, RegisterUnit.Watts, ScalingFactorAddress = 40085)]
     public float AcPowerInWatts { get; set; }
@@ -30,10 +31,4 @@ public class GenerationRegister
 
     [RegisterMapping(40101, RegisterType.ScaledInt16, RegisterUnit.Watts, ScalingFactorAddress = 40102)]
     public float DcPowerInWatts { get; set; }
-
-    [RegisterMapping(40108, RegisterType.UInt16)]
-    public OperatingState OperatingState { get; set; }
-
-    public float EfficiencyInPercent => (float) Math.Round(AcPowerInWatts / DcPowerInWatts * 100, 2);
-    public float EfficiencyPowerLossInWatts => (float) Math.Round(DcPowerInWatts - AcPowerInWatts, 1);
 }

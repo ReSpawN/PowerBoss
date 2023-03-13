@@ -24,7 +24,7 @@ namespace PowerBoss.Infra.Database.MongoDb.Repositories;
 /// <typeparam name="TModel"></typeparam>
 public abstract class RepositoryBase<TDocument, TModel> : IRepository<TModel>
     where TDocument : DocumentBase
-    where TModel : ModelBase
+    where TModel : IIdentifiableModel
 {
     private readonly IMongoClient _client;
     private readonly IMongoDatabase _database;

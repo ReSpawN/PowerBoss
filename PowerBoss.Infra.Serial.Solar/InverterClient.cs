@@ -8,8 +8,9 @@ using PowerBoss.Domain.Solar.Events;
 using PowerBoss.Domain.Solar.Interfaces;
 using PowerBoss.Domain.Solar.Models;
 using PowerBoss.Infra.Serial.Solar.Configuration;
+using PowerBoss.Infra.Serial.Solar.Enums;
 using PowerBoss.Infra.Serial.Solar.Extensions;
-using PowerBoss.Infra.Serial.Solar.Models;
+using PowerBoss.Infra.Serial.Solar.Dtos;
 #pragma warning disable CS8763
 
 namespace PowerBoss.Infra.Serial.Solar;
@@ -87,11 +88,11 @@ public class InverterClient : IInverterClient
     /// <summary>
     ///     Async wrapper for reading to prevent thread locking.
     /// </summary>
-    public async Task<Register> ReadRegister()
+    public Register ReadRegister()
     {
-        InverterRegister register = await Task.Run(Read<InverterRegister>);
+        InverterRegisterDto dto = Read<InverterRegisterDto>();
 
-        return _mapper.Map<Register>(register);
+        return _mapper.Map<Register>(dto);
     }
 
     private T Read<T>()

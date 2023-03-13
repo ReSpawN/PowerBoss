@@ -24,7 +24,19 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\PowerBoss.Infra.Database.MongoDb\PowerBoss.Infra.Database.MongoDb.csproj" />
       <ProjectReference Include="..\PowerBoss.Infra.Serial.Solar\PowerBoss.Infra.Serial.Solar.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Data\register.json" />
+      <Content Include="Data\register.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Data\document.json" />
+      <Content Include="Data\document.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

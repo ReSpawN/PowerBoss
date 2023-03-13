@@ -3,7 +3,7 @@
 namespace PowerBoss.Infra.Database.MongoDb.Documents.Tesla;
 
 [Collection("vehicles")]
-public sealed class VehicleDocument : DocumentBase
+public sealed record VehicleDocument : DocumentBase
 {
     public required Ulid DriverUlid { get; set; }
     public required string Name { get; set; }

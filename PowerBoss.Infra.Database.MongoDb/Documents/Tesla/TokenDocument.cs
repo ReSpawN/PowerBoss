@@ -5,7 +5,7 @@ using PowerBoss.Infra.Database.MongoDb.Attributes;
 namespace PowerBoss.Infra.Database.MongoDb.Documents.Tesla;
 
 [Collection("token")]
-public sealed class TokenDocument : DocumentBase
+public sealed record TokenDocument : DocumentBase
 {
     public required Ulid DriverUlid { get; set; }
     public required string AccessToken { get; set; }

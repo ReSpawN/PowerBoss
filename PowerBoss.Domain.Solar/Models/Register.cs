@@ -1,34 +1,16 @@
 ﻿using PowerBoss.Domain.Models;
+using PowerBoss.Domain.Solar.Enums;
 
 namespace PowerBoss.Domain.Solar.Models;
 
-public sealed class Register : ModelBase
+public sealed record Register : DtoBase
 {
-    public required ushort Phase { get; init; }
-
-    public Register(
-        DateTimeOffset? createdAt = null,
-        DateTimeOffset? updatedAt = null
-    )
-        : base(Ulid.NewUlid(), createdAt ?? DateTimeOffset.UtcNow, updatedAt)
-    {
-    }
-
-    // public Register(
-    //     Ulid ulid,
-    //     ushort phase,
-    //     DateTimeOffset? createdAt = null,
-    //     DateTimeOffset? updatedAt = null
-    // )
-    //     : base(ulid, createdAt, updatedAt)
-    // {
-    //     Phase = phase;
-    // }
-    //
-    // public static Register CreateNew(ushort phase) =>
-    //     new(
-    //         Ulid.NewUlid(),
-    //         phase,
-    //         DateTimeOffset.UtcNow
-    //     );
+    public required Phase Phase { get; init; }
+    public required RegisterAcCurrent AcCurrent { get; init; }
+    public required RegisterAcVoltages AcVoltage { get; init; }
+    public required RegisterGeneration Generation { get; init; }
+    public required float ApparentPowerInVa { get; init; }
+    public required float ReactivePowerInVar { get; init; }
+    public required float HeatSinkTemperatureInCelsius { get; init; }
+    public required OperatingState OperatingState { get; init; }
 }

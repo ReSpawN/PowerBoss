@@ -32,7 +32,7 @@ public class SolarService : ISolarService
 
     public async Task LogRegisterInterval()
     {
-        Register register = await _client.ReadRegister();
+        Register register = _client.ReadRegister();
 
         await _repository.InsertOne(register);
     }

@@ -9,5 +9,5 @@ public interface IInverterClient : IDisposable
     event ConnectionEvent Disconnected;
     bool Connect();
     void Disconnect();
-    Task<Register> ReadRegister();
+    Register ReadRegister();
 }

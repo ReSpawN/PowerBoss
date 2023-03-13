@@ -1,10 +1,10 @@
 using PowerBoss.Infra.Serial.Solar.Attributes;
 using PowerBoss.Infra.Serial.Solar.Enums;
 
-namespace PowerBoss.Infra.Serial.Solar.Models;
+namespace PowerBoss.Infra.Serial.Solar.Dtos;
 
-[RegisterMapping(typeof(AcVoltagesRegister))]
-public class AcVoltagesRegister
+[RegisterMapping(typeof(AcVoltagesRegisterDto))]
+public class AcVoltagesRegisterDto
 {
     [RegisterMapping(40077, RegisterType.ScaledUInt16, RegisterUnit.Volts, ScalingFactorAddress = 40083)]
     public float PhaseABInVolts { get; set; }

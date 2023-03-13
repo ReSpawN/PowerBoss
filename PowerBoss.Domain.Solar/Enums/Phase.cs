@@ -1,4 +1,4 @@
-namespace PowerBoss.Infra.Serial.Solar.Enums;
+﻿namespace PowerBoss.Domain.Solar.Enums;
 
 public enum Phase : ushort
 {

@@ -1,0 +1,31 @@
+﻿{
+	"Phase": 103,
+	"AcCurrentRegister": {
+		"TotalInAmps": 2.06,
+		"PhaseAInAmps": 0.68,
+		"PhaseBInAmps": 0.69,
+		"PhaseCInAmps": 0.68
+	},
+	"AcVoltageRegister": {
+		"PhaseABInVolts": 395.9,
+		"PhaseBCInVolts": 394.5,
+		"PhaseCAInVolts": 393.9,
+		"PhaseANInVolts": 229.2,
+		"PhaseBNInVolts": 229.7,
+		"PhaseCNInVolts": 224.9
+	},
+	"GenerationRegister": {
+		"AcPowerInWatts": 388.5,
+		"AcFrequencyInHertz": 49.96,
+		"PowerFactorInPercent": -82.55,
+		"AcLifetimeProductionInWatts": 7897599,
+		"DcCurrentInAmps": 0.5258,
+		"DcVoltageInVolts": 750,
+		"DcPowerInWatts": 394.4,
+		"OperatingState": 4
+	},
+	"ApparentPowerInVa": 470.6,
+	"ReactivePowerInVar": -265.56,
+	"HeatSinkTemperatureInCelsius": 44.34,
+	"OperatingState": 4
+}

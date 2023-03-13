@@ -1,8 +1,9 @@
 using FluentAssertions;
+using PowerBoss.Domain.Solar.Enums;
 using PowerBoss.Infra.Serial.Solar.Attributes;
 using PowerBoss.Infra.Serial.Solar.Enums;
 using PowerBoss.Infra.Serial.Solar.Helpers;
-using PowerBoss.Infra.Serial.Solar.Models;
+using PowerBoss.Infra.Serial.Solar.Dtos;
 
 namespace PowerBoss.Infra.Serial.Solar.Tests;
 
@@ -23,7 +24,7 @@ public class RegisterMappingAttributeTests
     }
 }
 
-[RegisterMapping(typeof(GenerationRegister))]
+[RegisterMapping(typeof(GenerationRegisterDto))]
 internal class RegisterMappingAddressRangeTest
 {
     [RegisterMapping(40094, RegisterType.ScaledAcc32, RegisterUnit.WattHours, ScalingFactorAddress = 40096)]

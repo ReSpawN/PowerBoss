@@ -41,7 +41,8 @@ public class SolarWorkerService : BackgroundService
 
             if (stopwatch.ElapsedMilliseconds < Interval)
             {
-                await Task.Delay((int) stopwatch.ElapsedMilliseconds - Interval, stoppingToken);
+                _logger.LogDebug($"Normalizing stopwatch delay to {Interval - (int)stopwatch.ElapsedMilliseconds} ms");
+                await Task.Delay(Interval - (int)stopwatch.ElapsedMilliseconds, stoppingToken);
             }
 
             stopwatch.Reset();
